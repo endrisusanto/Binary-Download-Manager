@@ -16,6 +16,28 @@ Fokus saat ini:
 
 ## CLI
 
+### Build dari GitHub Actions
+
+Kalau Windows lokal belum punya MSVC linker, gunakan GitHub Actions:
+
+1. Buka repo GitHub `endrisusanto/Binary-Download-Manager`.
+2. Masuk tab `Actions`.
+3. Pilih workflow `Build MDVH Agent Probe`.
+4. Klik `Run workflow`.
+5. Setelah selesai, download artifact `mdvh-agent-probe-windows`.
+6. Extract artifact, lalu jalankan `mdvh-agent-probe.exe` di Windows yang memiliki RAON agent aktif.
+
+Contoh menjalankan executable hasil artifact:
+
+```cmd
+mdvh-agent-probe.exe ^
+  --workflow-json raonk-workflow-sample.json ^
+  --output-dir downloads ^
+  --port 47317
+```
+
+### Build lokal
+
 ```bash
 cargo run --manifest-path tools/mdvh-agent-probe/Cargo.toml -- \
   --workflow-json fixtures/raonk-workflow/raonk-workflow-sample.json \

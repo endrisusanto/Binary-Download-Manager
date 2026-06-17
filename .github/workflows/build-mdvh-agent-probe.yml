@@ -1,0 +1,57 @@
+name: Build MDVH Agent Probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  windows-probe:
+    name: Windows mdvh-agent-probe
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Rust stable
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Check formatting
+        run: cargo fmt --all --check
+
+      - name: Run tests
+        run: cargo test --workspace
+
+      - name: Build release
+        run: cargo build --release --package mdvh-agent-probe
+
+      - name: Smoke parse sample workflow
+        shell: pwsh
+        run: |
+          target\release\mdvh-agent-probe.exe `
+            --workflow-json fixtures\raonk-workflow\raonk-workflow-sample.json `
+            --output-dir downloads `
+            --parse-only
+
+      - name: Package artifact
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Copy-Item target\release\mdvh-agent-probe.exe dist\mdvh-agent-probe.exe
+          Copy-Item README.md dist\README.md
+          Copy-Item fixtures\raonk-workflow\raonk-workflow-sample.json dist\raonk-workflow-sample.json
+
+      - name: Upload Windows executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: mdvh-agent-probe-windows
+          path: dist/*
+          if-no-files-found: error
