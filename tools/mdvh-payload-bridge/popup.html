@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MDVH Bridge</title>
+    <style>
+      body { width: 360px; margin: 0; padding: 12px; font: 12px system-ui, sans-serif; color: #111827; background: #f8fafc; }
+      label { display: grid; gap: 4px; margin-bottom: 10px; }
+      input[type="text"] { width: 100%; box-sizing: border-box; padding: 7px; border: 1px solid #cbd5e1; border-radius: 6px; }
+      button { border: 1px solid #cbd5e1; border-radius: 6px; background: white; padding: 7px 9px; cursor: pointer; }
+      .row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+      pre { max-height: 240px; overflow: auto; white-space: pre-wrap; word-break: break-word; background: white; border: 1px solid #e2e8f0; border-radius: 6px; padding: 8px; }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <strong>MDVH Payload Bridge</strong>
+      <label class="row"><input id="enabled" type="checkbox"> Intercept</label>
+    </div>
+    <label>
+      Receiver URL
+      <input id="receiver-url" type="text">
+    </label>
+    <div class="row">
+      <button id="save">Save</button>
+      <button id="refresh">Refresh</button>
+    </div>
+    <p id="status"></p>
+    <pre id="last"></pre>
+    <script src="popup.js"></script>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "MDVH Payload Bridge",
+  "version": "0.1.0",
+  "description": "Intercept MDVH selected binary payloads and send them to Binary Download Manager.",
+  "permissions": ["storage"],
+  "host_permissions": [
+    "http://mdvh.sec.samsung.net/*",
+    "http://127.0.0.1:48991/*",
+    "http://localhost:48991/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["http://mdvh.sec.samsung.net/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": false
+    }
+  ],
+  "action": {
+    "default_title": "MDVH Bridge",
+    "default_popup": "popup.html"
+  }
+}

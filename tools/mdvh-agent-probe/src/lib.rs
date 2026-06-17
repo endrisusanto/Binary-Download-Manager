@@ -6,7 +6,8 @@ use serde_json::{json, Value};
 use std::collections::BTreeSet;
 use std::path::{Path, PathBuf};
 use std::time::Duration;
-use tokio::io::AsyncWriteExt;
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use tokio::net::TcpListener;
 
 pub const EXIT_DOWNLOADED: i32 = 0;
 pub const EXIT_AGENT_REACHABLE_NO_STREAM: i32 = 10;
@@ -101,10 +102,27 @@ pub struct ProbeOptions {
 }
 
 #[derive(Debug, Clone)]
+pub struct PayloadListenOptions {
+    pub bind_host: String,
+    pub bind_port: u16,
+    pub output_dir: PathBuf,
+}
+
+#[derive(Debug, Clone)]
 struct CandidateEndpoint {
     method: Method,
     url: String,
     body: Option<Value>,
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct PayloadListenReport {
+    pub status: String,
+    pub bind: String,
+    #[serde(rename = "outputDir")]
+    pub output_dir: String,
+    #[serde(rename = "latestPayload")]
+    pub latest_payload: String,
 }
 
 #[derive(Debug, Clone)]
@@ -257,6 +275,178 @@ pub async fn run_probe(options: ProbeOptions) -> Result<ProbeReport> {
         reachable_endpoint,
         notes,
     ))
+}
+
+pub async fn listen_for_payloads(options: PayloadListenOptions) -> Result<i32> {
+    tokio::fs::create_dir_all(&options.output_dir)
+        .await
+        .with_context(|| format!("failed to create {}", options.output_dir.display()))?;
+    let bind = format!("{}:{}", options.bind_host, options.bind_port);
+    let listener = TcpListener::bind(&bind)
+        .await
+        .with_context(|| format!("failed to bind payload listener on {bind}"))?;
+    let latest_payload = options.output_dir.join("latest-mdvh-payload.json");
+    let report = PayloadListenReport {
+        status: "listening".to_string(),
+        bind: bind.clone(),
+        output_dir: options.output_dir.display().to_string(),
+        latest_payload: latest_payload.display().to_string(),
+    };
+    println!("{}", serde_json::to_string_pretty(&report)?);
+
+    loop {
+        let (mut stream, peer) = listener.accept().await?;
+        let output_dir = options.output_dir.clone();
+        tokio::spawn(async move {
+            if let Err(error) = handle_payload_connection(&mut stream, &output_dir).await {
+                let _ = write_http_response(
+                    &mut stream,
+                    "500 Internal Server Error",
+                    "application/json",
+                    &json!({ "ok": false, "error": format!("{error:#}") }).to_string(),
+                )
+                .await;
+                eprintln!("payload connection from {peer} failed: {error:#}");
+            }
+        });
+    }
+}
+
+async fn handle_payload_connection(
+    stream: &mut tokio::net::TcpStream,
+    output_dir: &Path,
+) -> Result<()> {
+    let mut buffer = vec![0u8; 1024 * 1024];
+    let mut read_total = 0usize;
+    loop {
+        let read = stream.read(&mut buffer[read_total..]).await?;
+        if read == 0 {
+            break;
+        }
+        read_total += read;
+        if read_total >= 4
+            && buffer[..read_total]
+                .windows(4)
+                .any(|window| window == b"\r\n\r\n")
+        {
+            let header_end = buffer[..read_total]
+                .windows(4)
+                .position(|window| window == b"\r\n\r\n")
+                .map(|position| position + 4)
+                .ok_or_else(|| anyhow!("request header terminator missing"))?;
+            let headers = String::from_utf8_lossy(&buffer[..header_end]).into_owned();
+            let content_length = parse_content_length(&headers)?;
+            while read_total < header_end + content_length {
+                let read = stream.read(&mut buffer[read_total..]).await?;
+                if read == 0 {
+                    break;
+                }
+                read_total += read;
+            }
+            let body =
+                &buffer[header_end..header_end + content_length.min(read_total - header_end)];
+            return handle_http_payload(stream, output_dir, &headers, body).await;
+        }
+        if read_total == buffer.len() {
+            return Err(anyhow!("request too large"));
+        }
+    }
+    Err(anyhow!("empty request"))
+}
+
+async fn handle_http_payload(
+    stream: &mut tokio::net::TcpStream,
+    output_dir: &Path,
+    headers: &str,
+    body: &[u8],
+) -> Result<()> {
+    let request_line = headers.lines().next().unwrap_or_default();
+    if request_line.starts_with("OPTIONS ") {
+        return write_http_response(stream, "204 No Content", "text/plain", "").await;
+    }
+    if !request_line.starts_with("POST /import-mdvh ") {
+        return write_http_response(
+            stream,
+            "404 Not Found",
+            "application/json",
+            &json!({ "ok": false, "error": "expected POST /import-mdvh" }).to_string(),
+        )
+        .await;
+    }
+
+    let payload: Value = serde_json::from_slice(body).context("payload body is not valid JSON")?;
+    let selected_count = payload
+        .get("selectedFiles")
+        .and_then(Value::as_array)
+        .map(|files| files.len())
+        .unwrap_or(0);
+    let timestamp = timestamp_for_filename();
+    let payload_path = output_dir.join(format!("mdvh-payload-{timestamp}.json"));
+    let latest_path = output_dir.join("latest-mdvh-payload.json");
+    let pretty = serde_json::to_string_pretty(&payload)?;
+    tokio::fs::write(&payload_path, &pretty).await?;
+    tokio::fs::write(&latest_path, &pretty).await?;
+    println!(
+        "{}",
+        serde_json::to_string_pretty(&json!({
+            "status": "payload_received",
+            "selectedFiles": selected_count,
+            "path": payload_path,
+            "latest": latest_path,
+        }))?
+    );
+
+    write_http_response(
+        stream,
+        "200 OK",
+        "application/json",
+        &json!({
+            "ok": true,
+            "selectedFiles": selected_count,
+            "path": payload_path,
+        })
+        .to_string(),
+    )
+    .await
+}
+
+fn parse_content_length(headers: &str) -> Result<usize> {
+    for line in headers.lines() {
+        let Some((name, value)) = line.split_once(':') else {
+            continue;
+        };
+        if name.eq_ignore_ascii_case("content-length") {
+            return value
+                .trim()
+                .parse::<usize>()
+                .context("invalid Content-Length");
+        }
+    }
+    Ok(0)
+}
+
+async fn write_http_response(
+    stream: &mut tokio::net::TcpStream,
+    status: &str,
+    content_type: &str,
+    body: &str,
+) -> Result<()> {
+    let response = format!(
+        "HTTP/1.1 {status}\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Allow-Methods: POST, OPTIONS\r\nAccess-Control-Allow-Headers: Content-Type\r\nContent-Type: {content_type}\r\nContent-Length: {}\r\nConnection: close\r\n\r\n{body}",
+        body.len()
+    );
+    stream.write_all(response.as_bytes()).await?;
+    stream.flush().await?;
+    Ok(())
+}
+
+fn timestamp_for_filename() -> String {
+    use std::time::{SystemTime, UNIX_EPOCH};
+    let millis = SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|duration| duration.as_millis())
+        .unwrap_or_default();
+    millis.to_string()
 }
 
 fn report_for_selected(

@@ -50,6 +50,8 @@ jobs:
           Copy-Item target\release\mdvh-agent-probe.exe dist\mdvh-agent-probe.exe
           Copy-Item README.md dist\README.md
           Copy-Item fixtures\raonk-workflow\raonk-workflow-sample.json dist\raonk-workflow-sample.json
+          Copy-Item tools\mdvh-payload-bridge dist\mdvh-payload-bridge -Recurse
+          Compress-Archive -Path dist\mdvh-payload-bridge -DestinationPath dist\mdvh-payload-bridge.zip
 
       - name: Upload Windows executable
         uses: actions/upload-artifact@v4

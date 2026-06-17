@@ -16,6 +16,32 @@ Fokus saat ini:
 
 ## CLI
 
+## Phase 1: Capture Payload Tanpa RAON Dialog
+
+Jalankan receiver lokal:
+
+```cmd
+mdvh-agent-probe.exe ^
+  --listen-payload ^
+  --output-dir payloads ^
+  --listen-port 48991
+```
+
+Install extension:
+
+1. Buka Chrome/Edge `chrome://extensions` atau `edge://extensions`.
+2. Aktifkan `Developer mode`.
+3. Klik `Load unpacked`.
+4. Pilih folder `tools/mdvh-payload-bridge`.
+5. Buka halaman MDVH, centang file, klik `Download`.
+
+Saat intercept aktif, RAON dialog tidak dibuka. Payload akan disimpan ke:
+
+```text
+payloads/latest-mdvh-payload.json
+payloads/mdvh-payload-<timestamp>.json
+```
+
 ## Release Script
 
 Untuk build, auto commit, bump version, tag, dan push:

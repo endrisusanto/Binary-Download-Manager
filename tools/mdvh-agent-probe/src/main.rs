@@ -1,6 +1,9 @@
-use anyhow::Result;
+use anyhow::{anyhow, Result};
 use clap::Parser;
-use mdvh_agent_probe::{parse_workflow_file, run_probe, ProbeOptions, EXIT_INVALID_WORKFLOW_JSON};
+use mdvh_agent_probe::{
+    listen_for_payloads, parse_workflow_file, run_probe, PayloadListenOptions, ProbeOptions,
+    EXIT_INVALID_WORKFLOW_JSON,
+};
 use std::path::PathBuf;
 use std::process::ExitCode;
 use std::time::Duration;
@@ -10,7 +13,7 @@ use std::time::Duration;
 #[command(about = "Probe RAON local agent and attempt one MDVH/SSCM binary download")]
 struct Args {
     #[arg(long)]
-    workflow_json: PathBuf,
+    workflow_json: Option<PathBuf>,
 
     #[arg(long)]
     output_dir: PathBuf,
@@ -26,6 +29,15 @@ struct Args {
 
     #[arg(long)]
     parse_only: bool,
+
+    #[arg(long)]
+    listen_payload: bool,
+
+    #[arg(long, default_value_t = 48991)]
+    listen_port: u16,
+
+    #[arg(long, default_value = "127.0.0.1")]
+    listen_host: String,
 }
 
 #[tokio::main]
@@ -41,8 +53,22 @@ async fn main() -> ExitCode {
 
 async fn run() -> Result<i32> {
     let args = Args::parse();
+    if args.listen_payload {
+        return listen_for_payloads(PayloadListenOptions {
+            bind_host: args.listen_host,
+            bind_port: args.listen_port,
+            output_dir: args.output_dir,
+        })
+        .await;
+    }
+
+    let workflow_json = args
+        .workflow_json
+        .clone()
+        .ok_or_else(|| anyhow!("--workflow-json is required unless --listen-payload is used"))?;
+
     if args.parse_only {
-        match parse_workflow_file(&args.workflow_json) {
+        match parse_workflow_file(&workflow_json) {
             Ok(metadata) => {
                 println!("{}", serde_json::to_string_pretty(&metadata)?);
                 return Ok(0);
@@ -61,7 +87,7 @@ async fn run() -> Result<i32> {
     }
 
     let options = ProbeOptions {
-        workflow_json: args.workflow_json,
+        workflow_json,
         output_dir: args.output_dir,
         host: args.host,
         port: args.port,
