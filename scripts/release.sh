@@ -4,6 +4,10 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 CRATE_MANIFEST="$ROOT_DIR/tools/mdvh-agent-probe/Cargo.toml"
 PACKAGE_NAME="mdvh-agent-probe"
+TAURI_DIR="$ROOT_DIR/tools/mdvh-download-manager"
+TAURI_MANIFEST="$TAURI_DIR/src-tauri/Cargo.toml"
+TAURI_CONF="$TAURI_DIR/src-tauri/tauri.conf.json"
+TAURI_PACKAGE_JSON="$TAURI_DIR/package.json"
 
 usage() {
   cat <<'EOF'
@@ -97,15 +101,26 @@ if git ls-remote --tags origin "$tag" | grep -q "$tag"; then
   exit 1
 fi
 
-echo "Releasing $PACKAGE_NAME $current_version -> $next_version"
+echo "Releasing $PACKAGE_NAME and Tauri App $current_version -> $next_version"
 
+# Bump Rust library package version
 perl -0pi -e "s/(\\[package\\]\\nname = \"$PACKAGE_NAME\"\\nversion = \")$current_version(\"\\n)/\${1}$next_version\${2}/" "$CRATE_MANIFEST"
+
+# Bump Tauri App Rust Package version
+perl -0pi -e "s/(\\[package\\]\\nname = \"toolsmdvh-download-manager\"\\nversion = \")$current_version(\"\\n)/\${1}$next_version\${2}/" "$TAURI_MANIFEST"
+
+# Bump package.json version
+perl -pi -e "s/\"version\": \"$current_version\"/\"version\": \"$next_version\"/" "$TAURI_PACKAGE_JSON"
+
+# Bump tauri.conf.json version
+perl -pi -e "s/\"version\": \"$current_version\"/\"version\": \"$next_version\"/" "$TAURI_CONF"
 
 cargo fmt --all
 cargo test --workspace
 cargo build --release --package "$PACKAGE_NAME"
+cargo build --release --package "toolsmdvh-download-manager"
 
-git add "$CRATE_MANIFEST" Cargo.lock
+git add "$CRATE_MANIFEST" "$TAURI_MANIFEST" "$TAURI_CONF" "$TAURI_PACKAGE_JSON" Cargo.lock
 git commit -m "chore: release $tag"
 git tag -a "$tag" -m "Release $tag"
 

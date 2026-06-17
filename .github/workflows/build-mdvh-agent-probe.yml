@@ -35,6 +35,21 @@ jobs:
       - name: Build release
         run: cargo build --release --package mdvh-agent-probe
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install Node dependencies
+        run: |
+          cd tools/mdvh-download-manager
+          npm install
+
+      - name: Build Tauri app
+        run: |
+          cd tools/mdvh-download-manager
+          npm run tauri build
+
       - name: Smoke parse sample workflow
         shell: pwsh
         run: |
@@ -52,6 +67,9 @@ jobs:
           Copy-Item fixtures\raonk-workflow\raonk-workflow-sample.json dist\raonk-workflow-sample.json
           Copy-Item tools\mdvh-payload-bridge dist\mdvh-payload-bridge -Recurse
           Compress-Archive -Path dist\mdvh-payload-bridge -DestinationPath dist\mdvh-payload-bridge.zip
+          
+          # Copy Tauri NSIS executable installer
+          Copy-Item tools\mdvh-download-manager\src-tauri\target\release\bundle\nsis\*.exe dist\
 
       - name: Upload Windows executable
         uses: actions/upload-artifact@v4

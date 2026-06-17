@@ -94,7 +94,7 @@ async fn run() -> Result<i32> {
         timeout: Duration::from_secs(args.timeout_seconds),
     };
 
-    let report = match run_probe(options).await {
+    let report = match run_probe(options, None).await {
         Ok(report) => report,
         Err(error) => {
             println!(

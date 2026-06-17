@@ -1,5 +1,5 @@
 [workspace]
-members = ["tools/mdvh-agent-probe"]
+members = ["tools/mdvh-agent-probe", "tools/mdvh-download-manager/src-tauri"]
 resolver = "2"
 
 [workspace.package]

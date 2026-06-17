@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MDVH Binary Download Manager</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="/main.js" defer></script>
+</head>
+<body>
+  <div class="glass-bg"></div>
+  <div class="app-container">
+    <!-- Sidebar / Status Panel -->
+    <header class="app-header">
+      <div class="brand">
+        <img src="assets/logo.svg" alt="MDVH Download Manager" class="logo-image" />
+        <div class="brand-text">
+          <h1>MDVH Download Manager</h1>
+          <p class="subtitle">Phase 1: Interceptor & Downloader</p>
+        </div>
+      </div>
+      
+      <div class="header-actions">
+        <div class="status-indicator" id="listener-status">
+          <span class="status-dot offline"></span>
+          <span class="status-text">Connecting...</span>
+        </div>
+        <button id="btn-open-folder" class="btn btn-secondary">
+          <span class="icon">📁</span> Open Downloads
+        </button>
+        <button id="btn-clear-queue" class="btn btn-danger">
+          <span class="icon">🗑️</span> Clear Queue
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="app-content">
+      <section class="queue-section">
+        <div class="section-header">
+          <h2>Active Downloads</h2>
+          <span class="badge" id="queue-count">0 items</span>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="empty-state">
+          <div class="empty-icon">📥</div>
+          <h3>No downloads in queue</h3>
+          <p>Go to MDVH in your browser, select your files, and click "Download". The bridge extension will automatically capture the payload and start the download here.</p>
+        </div>
+
+        <!-- Download List -->
+        <div class="download-list" id="download-list" style="display: none;">
+          <!-- Items will be injected dynamically -->
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>Listening on <code>127.0.0.1:48991</code> | SSCM / MDVH Binary Bridging Tool v0.1.0</p>
+    </footer>
+  </div>
+</body>
+</html>

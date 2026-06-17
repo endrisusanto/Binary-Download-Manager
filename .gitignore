@@ -6,3 +6,5 @@
 *.tmp
 *.part
 /downloads/
+/payload-results/
+/tools/mdvh-payload-bridge.zip

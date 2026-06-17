@@ -37,6 +37,15 @@ pub struct SelectedFile {
     pub file_id: Option<String>,
 }
 
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct DownloadProgress {
+    pub file_name: String,
+    pub bytes_downloaded: u64,
+    pub total_bytes: u64,
+}
+
+pub type ProgressCallback = std::sync::Arc<dyn Fn(DownloadProgress) + Send + Sync + 'static>;
+
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct WorkflowMetadata {
     pub selected_files: Vec<SelectedFile>,
@@ -139,41 +148,71 @@ pub fn parse_workflow_file(path: &Path) -> Result<WorkflowMetadata> {
 
 pub fn parse_workflow_json(contents: &str) -> Result<WorkflowMetadata> {
     let root: Value = serde_json::from_str(contents).context("workflow JSON is not valid JSON")?;
-    let events = root
-        .as_array()
-        .ok_or_else(|| anyhow!("workflow JSON must be an array of events"))?;
 
-    let mut selected_files = Vec::new();
-    let mut ports = BTreeSet::new();
+    if let Some(events) = root.as_array() {
+        let mut selected_files = Vec::new();
+        let mut ports = BTreeSet::new();
 
-    for event in events {
-        let detail = event.get("detail").unwrap_or(&Value::Null);
-        if event.get("kind").and_then(Value::as_str) == Some("download-state-snapshot") {
-            if let Some(files) = detail.get("selectedFiles").and_then(Value::as_array) {
-                for file in files {
-                    selected_files.push(serde_json::from_value::<SelectedFile>(file.clone())?);
+        for event in events {
+            let detail = event.get("detail").unwrap_or(&Value::Null);
+            if event.get("kind").and_then(Value::as_str) == Some("download-state-snapshot") {
+                if let Some(files) = detail.get("selectedFiles").and_then(Value::as_array) {
+                    for file in files {
+                        selected_files.push(serde_json::from_value::<SelectedFile>(file.clone())?);
+                    }
+                }
+                if let Some(port) = detail
+                    .pointer("/raonkGlobals/RAONKSolutionAgent/connectedPort")
+                    .and_then(value_to_port)
+                {
+                    ports.insert(port);
                 }
             }
-            if let Some(port) = detail
-                .pointer("/raonkGlobals/RAONKSolutionAgent/connectedPort")
-                .and_then(value_to_port)
-            {
-                ports.insert(port);
-            }
         }
-    }
 
-    if selected_files.is_empty() {
-        return Err(anyhow!("no selectedFiles found in workflow JSON"));
-    }
+        if selected_files.is_empty() {
+            return Err(anyhow!("no selectedFiles found in workflow JSON"));
+        }
 
-    Ok(WorkflowMetadata {
-        selected_files,
-        connected_port: ports.into_iter().next(),
-    })
+        Ok(WorkflowMetadata {
+            selected_files,
+            connected_port: ports.into_iter().next(),
+        })
+    } else if let Some(obj) = root.as_object() {
+        let files_value = obj
+            .get("selectedFiles")
+            .ok_or_else(|| anyhow!("payload JSON is an object but lacks 'selectedFiles'"))?;
+        let files_array = files_value
+            .as_array()
+            .ok_or_else(|| anyhow!("'selectedFiles' in payload JSON must be an array"))?;
+
+        let mut selected_files = Vec::new();
+        for file in files_array {
+            selected_files.push(serde_json::from_value::<SelectedFile>(file.clone())?);
+        }
+
+        if selected_files.is_empty() {
+            return Err(anyhow!("selectedFiles array is empty"));
+        }
+
+        let connected_port = obj
+            .get("connectedPort")
+            .or_else(|| root.pointer("/raonkGlobals/RAONKSolutionAgent/connectedPort"))
+            .and_then(value_to_port);
+
+        Ok(WorkflowMetadata {
+            selected_files,
+            connected_port,
+        })
+    } else {
+        Err(anyhow!("workflow JSON must be either an array of events or a payload object"))
+    }
 }
 
-pub async fn run_probe(options: ProbeOptions) -> Result<ProbeReport> {
+pub async fn run_probe(
+    options: ProbeOptions,
+    progress_callback: Option<ProgressCallback>,
+) -> Result<ProbeReport> {
     let metadata = parse_workflow_file(&options.workflow_json)?;
     let selected = metadata
         .selected_files
@@ -220,7 +259,15 @@ pub async fn run_probe(options: ProbeOptions) -> Result<ProbeReport> {
     let candidates = build_candidate_endpoints(&agent_base.url, &selected);
     let mut reachable_endpoint = None;
     for candidate in candidates {
-        match try_candidate(&client, &candidate, &options.output_dir, &selected).await {
+        match try_candidate(
+            &client,
+            &candidate,
+            &options.output_dir,
+            &selected,
+            &progress_callback,
+        )
+        .await
+        {
             Ok(CandidateOutcome::Downloaded { path, bytes }) => {
                 notes.push(format!("downloaded {} bytes to {}", bytes, path.display()));
                 if bytes == selected.size {
@@ -628,6 +675,7 @@ async fn try_candidate(
     candidate: &CandidateEndpoint,
     output_dir: &Path,
     selected: &SelectedFile,
+    progress_callback: &Option<ProgressCallback>,
 ) -> Result<CandidateOutcome> {
     let mut request = client.request(candidate.method.clone(), &candidate.url);
     if let Some(body) = &candidate.body {
@@ -651,7 +699,14 @@ async fn try_candidate(
     let content_length = response.content_length();
     if looks_like_file_response(&content_type, content_length, selected.size) {
         let output_path = output_dir.join(&selected.file_name);
-        let bytes = save_response_body(response, &output_path).await?;
+        let bytes = save_response_body(
+            response,
+            &output_path,
+            selected.file_name.clone(),
+            selected.size,
+            progress_callback,
+        )
+        .await?;
         return Ok(CandidateOutcome::Downloaded {
             path: output_path,
             bytes,
@@ -676,7 +731,13 @@ fn looks_like_file_response(
         || content_type.contains("binary")
 }
 
-async fn save_response_body(response: reqwest::Response, output_path: &Path) -> Result<u64> {
+async fn save_response_body(
+    response: reqwest::Response,
+    output_path: &Path,
+    file_name: String,
+    total_bytes: u64,
+    progress_callback: &Option<ProgressCallback>,
+) -> Result<u64> {
     let mut file = tokio::fs::File::create(output_path)
         .await
         .with_context(|| format!("failed to create {}", output_path.display()))?;
@@ -686,6 +747,13 @@ async fn save_response_body(response: reqwest::Response, output_path: &Path) -> 
         let chunk = chunk?;
         file.write_all(&chunk).await?;
         total += chunk.len() as u64;
+        if let Some(callback) = progress_callback {
+            callback(DownloadProgress {
+                file_name: file_name.clone(),
+                bytes_downloaded: total,
+                total_bytes,
+            });
+        }
     }
     file.flush().await?;
     Ok(total)
@@ -795,5 +863,66 @@ mod tests {
     fn rejects_missing_selected_files() {
         let json = workflow_with_detail(json!({ "selectedFiles": [] }));
         assert!(parse_workflow_json(&json).is_err());
+    }
+
+    #[test]
+    fn parses_direct_payload_object() {
+        let json = json!({
+            "kind": "mdvh-selected-binaries",
+            "selectedFiles": [{
+                "fileName": "CP_A146.tar.md5",
+                "serverPath": "F:/SSCM_FILE/file.qb",
+                "size": "38441070",
+                "binaryId": "BIN",
+                "fileId": "FILE"
+            }]
+        })
+        .to_string();
+        let parsed = parse_workflow_json(&json).unwrap();
+        assert_eq!(parsed.connected_port, None);
+        assert_eq!(parsed.selected_files[0].file_name, "CP_A146.tar.md5");
+        assert_eq!(parsed.selected_files[0].size, 38441070);
+    }
+
+    #[tokio::test]
+    async fn test_progress_callback_during_download() {
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let addr = listener.local_addr().unwrap();
+
+        tokio::spawn(async move {
+            if let Ok((mut stream, _)) = listener.accept().await {
+                let mut buffer = [0u8; 1024];
+                let _ = tokio::io::AsyncReadExt::read(&mut stream, &mut buffer).await;
+                let body = vec![b'A'; 100];
+                let response = format!(
+                    "HTTP/1.1 200 OK\r\nContent-Length: {}\r\nConnection: close\r\n\r\n",
+                    body.len()
+                );
+                let _ = tokio::io::AsyncWriteExt::write_all(&mut stream, response.as_bytes()).await;
+                let _ = tokio::io::AsyncWriteExt::write_all(&mut stream, &body).await;
+            }
+        });
+
+        let client = reqwest::Client::new();
+        let res = client.get(format!("http://{}", addr)).send().await.unwrap();
+
+        let temp_dir = tempfile::tempdir().unwrap();
+        let output_path = temp_dir.path().join("test_file.bin");
+
+        let progress_updates = std::sync::Arc::new(std::sync::Mutex::new(Vec::new()));
+        let progress_updates_clone = progress_updates.clone();
+
+        let progress_callback: Option<ProgressCallback> = Some(std::sync::Arc::new(move |progress| {
+            progress_updates_clone.lock().unwrap().push(progress);
+        }));
+
+        let bytes = save_response_body(res, &output_path, "test_file.bin".to_string(), 100, &progress_callback).await.unwrap();
+        assert_eq!(bytes, 100);
+
+        let updates = progress_updates.lock().unwrap();
+        assert!(!updates.is_empty());
+        assert_eq!(updates.last().unwrap().bytes_downloaded, 100);
+        assert_eq!(updates.last().unwrap().total_bytes, 100);
+        assert_eq!(updates.last().unwrap().file_name, "test_file.bin");
     }
 }
