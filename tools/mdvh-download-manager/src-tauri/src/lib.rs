@@ -104,6 +104,11 @@ async fn resume_download(
 }
 
 #[tauri::command]
+fn get_app_version() -> String {
+    env!("CARGO_PKG_VERSION").to_string()
+}
+
+#[tauri::command]
 fn open_download_folder(
     app: AppHandle,
     state: tauri::State<'_, DownloadConfigState>,
@@ -515,7 +520,8 @@ pub fn run() {
             pick_download_dir,
             get_download_dir,
             pause_download,
-            resume_download
+            resume_download,
+            get_app_version
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

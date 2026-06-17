@@ -26,8 +26,24 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
     if (message?.type === "mdvh-payload") {
       const state = await getState();
+      let cookiesStr = message.payload.cookies || "";
+      try {
+        const pageUrl = message.payload.pageUrl || sender.tab?.url;
+        if (pageUrl) {
+          const urlObj = new URL(pageUrl);
+          // Query all cookies for this origin using privileged cookies API
+          const cookies = await chrome.cookies.getAll({ url: urlObj.origin });
+          if (cookies && cookies.length > 0) {
+            cookiesStr = cookies.map(c => `${c.name}=${c.value}`).join("; ");
+          }
+        }
+      } catch (err) {
+        console.error("Failed to retrieve cookies via chrome.cookies API:", err);
+      }
+
       const payload = {
         ...message.payload,
+        cookies: cookiesStr,
         sourceTab: {
           id: sender.tab?.id,
           url: sender.tab?.url,

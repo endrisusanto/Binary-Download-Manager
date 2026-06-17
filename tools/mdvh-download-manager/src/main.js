@@ -111,6 +111,17 @@ async function queryInitialBackendState() {
   } catch (err) {
     console.error("Failed to query download directory:", err);
   }
+
+  // Get app version
+  try {
+    const version = await invoke("get_app_version");
+    const subtitleEl = document.querySelector(".subtitle");
+    if (subtitleEl) {
+      subtitleEl.textContent = `SSCM / MDVH Binary Bridging Tool v${version}`;
+    }
+  } catch (err) {
+    console.error("Failed to query app version:", err);
+  }
 }
 
 function updateFolderDisplay(fullPath) {
