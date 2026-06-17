@@ -32,7 +32,10 @@ struct DownloadConfigState {
 }
 
 #[tauri::command]
-async fn pick_download_dir(app: tauri::AppHandle, state: tauri::State<'_, DownloadConfigState>) -> Result<Option<String>, String> {
+async fn pick_download_dir(
+    app: tauri::AppHandle,
+    state: tauri::State<'_, DownloadConfigState>,
+) -> Result<Option<String>, String> {
     use tauri_plugin_dialog::DialogExt;
     let folder = app.dialog().file().blocking_pick_folder();
     if let Some(path_buf) = folder {
@@ -46,11 +49,19 @@ async fn pick_download_dir(app: tauri::AppHandle, state: tauri::State<'_, Downlo
 
 #[tauri::command]
 fn get_download_dir(state: tauri::State<'_, DownloadConfigState>) -> String {
-    state.output_dir.lock().unwrap().to_string_lossy().into_owned()
+    state
+        .output_dir
+        .lock()
+        .unwrap()
+        .to_string_lossy()
+        .into_owned()
 }
 
 #[tauri::command]
-fn open_download_folder(app: AppHandle, state: tauri::State<'_, DownloadConfigState>) -> Result<(), String> {
+fn open_download_folder(
+    app: AppHandle,
+    state: tauri::State<'_, DownloadConfigState>,
+) -> Result<(), String> {
     use tauri_plugin_opener::OpenerExt;
     let path = state.output_dir.lock().unwrap().clone();
 
@@ -246,16 +257,23 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
                 "connectedPort": metadata.connected_port,
             });
 
-            let temp_payload_path = output_dir_base.join(format!("mdvh-payload-temp-{}-{}.json", timestamp, idx));
+            let temp_payload_path =
+                output_dir_base.join(format!("mdvh-payload-temp-{}-{}.json", timestamp, idx));
             let pretty = match serde_json::to_string_pretty(&single_payload) {
                 Ok(p) => p,
                 Err(e) => {
-                    let _ = app_file_clone.emit("download-error", format!("Failed to serialize temp payload: {}", e));
+                    let _ = app_file_clone.emit(
+                        "download-error",
+                        format!("Failed to serialize temp payload: {}", e),
+                    );
                     continue;
                 }
             };
             if let Err(e) = tokio::fs::write(&temp_payload_path, &pretty).await {
-                let _ = app_file_clone.emit("download-error", format!("Failed to write temp payload: {}", e));
+                let _ = app_file_clone.emit(
+                    "download-error",
+                    format!("Failed to write temp payload: {}", e),
+                );
                 continue;
             }
 
@@ -270,7 +288,12 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
             );
 
             // Fetch configured output directory from state
-            let output_dir = app_file_clone.state::<DownloadConfigState>().output_dir.lock().unwrap().clone();
+            let output_dir = app_file_clone
+                .state::<DownloadConfigState>()
+                .output_dir
+                .lock()
+                .unwrap()
+                .clone();
 
             // Run the probe and download in a background task
             let options = ProbeOptions {
