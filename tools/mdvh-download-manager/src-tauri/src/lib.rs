@@ -277,7 +277,7 @@ pub fn run() {
                 .build(app)?;
 
             // Start the HTTP payload listener on port 48991
-            tokio::spawn(async move {
+            tauri::async_runtime::spawn(async move {
                 start_payload_listener(handle, 48991).await;
             });
             Ok(())
