@@ -49,7 +49,9 @@ async fn start_payload_listener(app_handle: AppHandle, port: u16) {
 
     let listener = match TcpListener::bind(&bind_addr).await {
         Ok(l) => {
-            state.active.store(true, std::sync::atomic::Ordering::SeqCst);
+            state
+                .active
+                .store(true, std::sync::atomic::Ordering::SeqCst);
             let _ = app_handle.emit(
                 "listener-status",
                 serde_json::json!({
@@ -60,7 +62,9 @@ async fn start_payload_listener(app_handle: AppHandle, port: u16) {
             l
         }
         Err(e) => {
-            state.active.store(false, std::sync::atomic::Ordering::SeqCst);
+            state
+                .active
+                .store(false, std::sync::atomic::Ordering::SeqCst);
             *state.error.lock().unwrap() = Some(e.to_string());
             let _ = app_handle.emit(
                 "listener-status",
@@ -325,7 +329,10 @@ pub fn run() {
                 let _ = window.hide();
             }
         })
-        .invoke_handler(tauri::generate_handler![open_download_folder, get_listener_status])
+        .invoke_handler(tauri::generate_handler![
+            open_download_folder,
+            get_listener_status
+        ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }

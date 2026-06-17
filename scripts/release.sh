@@ -121,6 +121,7 @@ cargo build --release --package "$PACKAGE_NAME"
 cargo build --release --package "toolsmdvh-download-manager"
 
 git add "$CRATE_MANIFEST" "$TAURI_MANIFEST" "$TAURI_CONF" "$TAURI_PACKAGE_JSON" Cargo.lock
+git add -u
 git commit -m "chore: release $tag"
 git tag -a "$tag" -m "Release $tag"
 
