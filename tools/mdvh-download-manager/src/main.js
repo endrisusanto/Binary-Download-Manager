@@ -257,26 +257,34 @@ async function setupTauriListeners() {
 
     // Setup Pause/Resume local toggle
     const pauseResumeBtn = itemEl.querySelector(".pause-resume-btn");
-    pauseResumeBtn.addEventListener("click", () => {
+    pauseResumeBtn.addEventListener("click", async () => {
       const dbItem = downloadsDb[fileName];
       if (!dbItem) return;
 
       if (dbItem.paused) {
         // Resume download
-        dbItem.paused = false;
-        dbItem.status = "downloading";
-        dbItem.statusPill.className = "status-pill downloading";
-        dbItem.statusPill.textContent = "Downloading";
-        pauseResumeBtn.textContent = "⏸";
-        pauseResumeBtn.title = "Pause download";
+        try {
+          await invoke("resume_download", { fileName });
+          dbItem.paused = false;
+          dbItem.status = "downloading";
+          dbItem.statusPill.className = "status-pill downloading";
+          dbItem.statusPill.textContent = "Downloading";
+          pauseResumeBtn.textContent = "⏸";
+          pauseResumeBtn.title = "Pause download";
+        } catch (err) {
+          alert("Failed to resume: " + err);
+        }
       } else {
         // Pause download
-        dbItem.paused = true;
-        dbItem.status = "paused";
-        dbItem.statusPill.className = "status-pill paused";
-        dbItem.statusPill.textContent = "Paused";
-        pauseResumeBtn.textContent = "▶";
-        pauseResumeBtn.title = "Resume download";
+        try {
+          // Send pause command. UI will update when 'download-finished' (cancelled) is emitted
+          pauseResumeBtn.disabled = true; // prevent spamming
+          await invoke("pause_download", { fileName });
+          setTimeout(() => pauseResumeBtn.disabled = false, 1000);
+        } catch (err) {
+          alert("Failed to pause: " + err);
+          pauseResumeBtn.disabled = false;
+        }
       }
       updateMetrics();
     });
@@ -298,9 +306,6 @@ async function setupTauriListeners() {
     const progress = event.payload;
     const dbItem = downloadsDb[progress.file_name];
     if (!dbItem) return;
-
-    // Freeze visual progress updates if paused in the UI
-    if (dbItem.paused) return;
 
     dbItem.downloadedSize = progress.bytes_downloaded;
     const total = progress.total_bytes || dbItem.expectedSize;
@@ -325,6 +330,22 @@ async function setupTauriListeners() {
     const fileName = report.fileName;
     const dbItem = downloadsDb[fileName];
     if (!dbItem) return;
+
+    if (report.status === "cancelled") {
+      dbItem.paused = true;
+      dbItem.status = "paused";
+      dbItem.statusPill.className = "status-pill paused";
+      dbItem.statusPill.textContent = "Paused";
+      
+      const pauseResumeBtn = dbItem.el.querySelector(".pause-resume-btn");
+      if (pauseResumeBtn) {
+        pauseResumeBtn.textContent = "▶";
+        pauseResumeBtn.title = "Resume download";
+        pauseResumeBtn.disabled = false;
+      }
+      updateMetrics();
+      return;
+    }
 
     // Update state to completed
     dbItem.status = "completed";

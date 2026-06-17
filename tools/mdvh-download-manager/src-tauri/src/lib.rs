@@ -1,7 +1,8 @@
 use std::sync::Arc;
 
 use mdvh_agent_probe::{
-    parse_workflow_file, run_probe, DownloadProgress, ProbeOptions, ProgressCallback,
+    parse_workflow_file, run_direct_download, run_probe, DownloadProgress, ProbeOptions,
+    ProgressCallback,
 };
 use tauri::menu::{Menu, MenuItem};
 use tauri::tray::{TrayIconBuilder, TrayIconEvent};
@@ -31,6 +32,15 @@ struct DownloadConfigState {
     output_dir: std::sync::Mutex<std::path::PathBuf>,
 }
 
+struct ActiveDownload {
+    temp_payload_path: std::path::PathBuf,
+    cancellation_token: std::sync::Arc<std::sync::atomic::AtomicBool>,
+}
+
+struct DownloadManagerState {
+    active_downloads: std::sync::Mutex<std::collections::HashMap<String, ActiveDownload>>,
+}
+
 #[tauri::command]
 async fn pick_download_dir(
     app: tauri::AppHandle,
@@ -55,6 +65,38 @@ fn get_download_dir(state: tauri::State<'_, DownloadConfigState>) -> String {
         .unwrap()
         .to_string_lossy()
         .into_owned()
+}
+
+#[tauri::command]
+fn pause_download(
+    file_name: String,
+    state: tauri::State<'_, DownloadManagerState>,
+) -> Result<(), String> {
+    if let Some(download) = state.active_downloads.lock().unwrap().get(&file_name) {
+        download.cancellation_token.store(true, std::sync::atomic::Ordering::Relaxed);
+        Ok(())
+    } else {
+        Err(format!("Download {} not found", file_name))
+    }
+}
+
+#[tauri::command]
+async fn resume_download(
+    app: AppHandle,
+    file_name: String,
+    state: tauri::State<'_, DownloadManagerState>,
+) -> Result<(), String> {
+    let temp_payload_path = {
+        let downloads = state.active_downloads.lock().unwrap();
+        if let Some(download) = downloads.get(&file_name) {
+            download.temp_payload_path.clone()
+        } else {
+            return Err(format!("Download {} not found", file_name));
+        }
+    };
+
+    // Trigger download using the stored temporary payload JSON
+    trigger_download(&app, temp_payload_path).await.map_err(|e| e.to_string())
 }
 
 #[tauri::command]
@@ -255,6 +297,9 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
             let single_payload = serde_json::json!({
                 "selectedFiles": [selected_clone],
                 "connectedPort": metadata.connected_port,
+                "release": metadata.release,
+                "cookies": metadata.cookies,
+                "pageOrigin": metadata.page_origin,
             });
 
             let temp_payload_path =
@@ -295,13 +340,28 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
                 .unwrap()
                 .clone();
 
+            let cancellation_token = Arc::new(std::sync::atomic::AtomicBool::new(false));
+            
+            // Store active download
+            {
+                let state = app_file_clone.state::<DownloadManagerState>();
+                state.active_downloads.lock().unwrap().insert(
+                    selected.file_name.clone(),
+                    ActiveDownload {
+                        temp_payload_path: temp_payload_path.clone(),
+                        cancellation_token: cancellation_token.clone(),
+                    },
+                );
+            }
+
             // Run the probe and download in a background task
             let options = ProbeOptions {
                 workflow_json: temp_payload_path.clone(),
                 output_dir,
                 host: None,
                 port: None,
-                timeout: std::time::Duration::from_secs(30),
+                timeout: std::time::Duration::from_secs(600),
+                cancellation_token: Some(cancellation_token),
             };
 
             // Progress callback to emit progress to frontend
@@ -311,11 +371,26 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
             });
             let progress_callback = Some(callback);
 
+            let is_direct = metadata.raonk_flag.as_deref() == Some("N");
+
             tokio::spawn(async move {
-                match run_probe(options, progress_callback).await {
+                let result = if is_direct {
+                    run_direct_download(options, progress_callback).await
+                } else {
+                    run_probe(options, progress_callback).await
+                };
+
+                match result {
                     Ok(report) => {
-                        let _ = app_file_clone.emit("download-finished", report);
-                        let _ = tokio::fs::remove_file(&temp_payload_path).await;
+                        let is_cancelled = matches!(report.status, mdvh_agent_probe::ProbeStatus::Cancelled);
+                        let _ = app_file_clone.emit("download-finished", &report);
+                        
+                        // Only remove payload if not cancelled, because we need it to resume
+                        if !is_cancelled {
+                            let _ = tokio::fs::remove_file(&temp_payload_path).await;
+                            let state = app_file_clone.state::<DownloadManagerState>();
+                            state.active_downloads.lock().unwrap().remove(&selected.file_name);
+                        }
                     }
                     Err(e) => {
                         let _ = app_file_clone.emit(
@@ -326,6 +401,8 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
                             }),
                         );
                         let _ = tokio::fs::remove_file(&temp_payload_path).await;
+                        let state = app_file_clone.state::<DownloadManagerState>();
+                        state.active_downloads.lock().unwrap().remove(&selected.file_name);
                     }
                 }
             });
@@ -356,6 +433,9 @@ pub fn run() {
         })
         .manage(DownloadConfigState {
             output_dir: std::sync::Mutex::new(default_output_dir),
+        })
+        .manage(DownloadManagerState {
+            active_downloads: std::sync::Mutex::new(std::collections::HashMap::new()),
         })
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_dialog::init())
@@ -420,7 +500,9 @@ pub fn run() {
             open_download_folder,
             get_listener_status,
             pick_download_dir,
-            get_download_dir
+            get_download_dir,
+            pause_download,
+            resume_download
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

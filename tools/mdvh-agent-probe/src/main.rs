@@ -92,6 +92,7 @@ async fn run() -> Result<i32> {
         host: args.host,
         port: args.port,
         timeout: Duration::from_secs(args.timeout_seconds),
+        cancellation_token: None,
     };
 
     let report = match run_probe(options, None).await {

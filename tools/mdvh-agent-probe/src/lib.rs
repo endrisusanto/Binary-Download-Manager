@@ -50,6 +50,14 @@ pub type ProgressCallback = std::sync::Arc<dyn Fn(DownloadProgress) + Send + Syn
 pub struct WorkflowMetadata {
     pub selected_files: Vec<SelectedFile>,
     pub connected_port: Option<u16>,
+    #[serde(default, rename = "raonkFlag")]
+    pub raonk_flag: Option<String>,
+    #[serde(default)]
+    pub cookies: Option<String>,
+    #[serde(default, rename = "pageOrigin")]
+    pub page_origin: Option<String>,
+    #[serde(default)]
+    pub release: Option<Value>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -59,6 +67,7 @@ pub enum ProbeStatus {
     AgentReplayed,
     EndpointFound,
     Failed,
+    Cancelled,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -86,6 +95,7 @@ impl ProbeReport {
             ProbeStatus::Downloaded => EXIT_DOWNLOADED,
             ProbeStatus::AgentReplayed => EXIT_AGENT_REACHABLE_NO_STREAM,
             ProbeStatus::EndpointFound => EXIT_ENDPOINT_DOWNLOAD_FAILED,
+            ProbeStatus::Cancelled => 50,
             ProbeStatus::Failed => {
                 if self
                     .notes
@@ -108,6 +118,7 @@ pub struct ProbeOptions {
     pub host: Option<String>,
     pub port: Option<u16>,
     pub timeout: Duration,
+    pub cancellation_token: Option<std::sync::Arc<std::sync::atomic::AtomicBool>>,
 }
 
 #[derive(Debug, Clone)]
@@ -177,6 +188,10 @@ pub fn parse_workflow_json(contents: &str) -> Result<WorkflowMetadata> {
         Ok(WorkflowMetadata {
             selected_files,
             connected_port: ports.into_iter().next(),
+            raonk_flag: None,
+            cookies: None,
+            page_origin: None,
+            release: None,
         })
     } else if let Some(obj) = root.as_object() {
         let files_value = obj
@@ -200,9 +215,31 @@ pub fn parse_workflow_json(contents: &str) -> Result<WorkflowMetadata> {
             .or_else(|| root.pointer("/raonkGlobals/RAONKSolutionAgent/connectedPort"))
             .and_then(value_to_port);
 
+        let raonk_flag = obj
+            .get("release")
+            .and_then(|r| r.get("raonkFlag"))
+            .and_then(Value::as_str)
+            .map(String::from);
+
+        let cookies = obj
+            .get("cookies")
+            .and_then(Value::as_str)
+            .map(String::from);
+
+        let page_origin = obj
+            .get("pageOrigin")
+            .and_then(Value::as_str)
+            .map(String::from);
+
+        let release = obj.get("release").cloned();
+
         Ok(WorkflowMetadata {
             selected_files,
             connected_port,
+            raonk_flag,
+            cookies,
+            page_origin,
+            release,
         })
     } else {
         Err(anyhow!(
@@ -267,6 +304,7 @@ pub async fn run_probe(
             &options.output_dir,
             &selected,
             &progress_callback,
+            &options.cancellation_token,
         )
         .await
         {
@@ -307,6 +345,18 @@ pub async fn run_probe(
                 ));
             }
             Ok(CandidateOutcome::Ignored { reason }) => notes.push(reason),
+            Ok(CandidateOutcome::Cancelled) => {
+                notes.push("download cancelled by user".to_string());
+                return Ok(report_for_selected(
+                    ProbeStatus::Cancelled,
+                    &selected,
+                    None,
+                    Some(agent_base.port),
+                    Some(agent_base.url),
+                    Some(candidate.url),
+                    notes,
+                ));
+            }
             Err(error) => notes.push(format!("{} failed: {error:#}", candidate.url)),
         }
     }
@@ -324,6 +374,290 @@ pub async fn run_probe(
         reachable_endpoint,
         notes,
     ))
+}
+
+/// Direct download from SSCM server for raonkFlag=N files.
+/// Uses captured browser cookies for authentication.
+pub async fn run_direct_download(
+    options: ProbeOptions,
+    progress_callback: Option<ProgressCallback>,
+) -> Result<ProbeReport> {
+    let metadata = parse_workflow_file(&options.workflow_json)?;
+    let selected = metadata
+        .selected_files
+        .first()
+        .ok_or_else(|| anyhow!("no selected file available after parsing"))?
+        .clone();
+
+    let mut notes = Vec::new();
+    notes.push(format!(
+        "direct download for {} from {}",
+        selected.file_name, selected.server_path
+    ));
+
+    let cookies = metadata.cookies.unwrap_or_default();
+    let page_origin = metadata
+        .page_origin
+        .unwrap_or_else(|| "http://mdvh.sec.samsung.net".to_string());
+
+    if cookies.is_empty() {
+        notes.push("no browser cookies captured, authentication may fail".to_string());
+    }
+
+    let client = Client::builder()
+        .timeout(options.timeout)
+        .danger_accept_invalid_certs(true)
+        .redirect(reqwest::redirect::Policy::limited(10))
+        .build()
+        .context("failed to build HTTP client")?;
+
+    tokio::fs::create_dir_all(&options.output_dir)
+        .await
+        .with_context(|| format!("failed to create {}", options.output_dir.display()))?;
+
+    // Build candidate SSCM download URLs
+    let release = metadata.release.unwrap_or(json!({}));
+    let sscm_urls = build_sscm_download_urls(&page_origin, &selected, &release);
+
+    notes.push(format!("trying {} SSCM download URLs", sscm_urls.len()));
+
+    for sscm_url in &sscm_urls {
+        notes.push(format!("trying URL: {}", sscm_url.url));
+
+        let output_path = options.output_dir.join(&selected.file_name);
+        let mut start_bytes = 0u64;
+
+        if let Ok(meta) = tokio::fs::metadata(&output_path).await {
+            if meta.is_file() {
+                start_bytes = meta.len();
+                if start_bytes == selected.size {
+                    notes.push("file already fully downloaded".to_string());
+                    return Ok(report_for_selected(
+                        ProbeStatus::Downloaded,
+                        &selected,
+                        Some(start_bytes),
+                        None,
+                        None,
+                        Some(sscm_url.url.clone()),
+                        notes,
+                    ));
+                }
+            }
+        }
+
+        let mut request = if sscm_url.is_post {
+            let form_body = sscm_url.form_data.as_deref().unwrap_or("");
+            client
+                .post(&sscm_url.url)
+                .header("Content-Type", "application/x-www-form-urlencoded")
+                .body(form_body.to_string())
+        } else {
+            client.get(&sscm_url.url)
+        };
+
+        request = request
+            .header("Cookie", &cookies)
+            .header("Referer", &page_origin);
+
+        if start_bytes > 0 {
+            request = request.header("Range", format!("bytes={}-", start_bytes));
+        }
+
+        let response = match request.send().await {
+            Ok(r) => r,
+            Err(e) => {
+                notes.push(format!("{} failed: {}", sscm_url.url, e));
+                continue;
+            }
+        };
+
+        let status = response.status();
+        if !status.is_success() && status != StatusCode::PARTIAL_CONTENT {
+            notes.push(format!("{} returned HTTP {}", sscm_url.url, status.as_u16()));
+            continue;
+        }
+
+        let content_type = response
+            .headers()
+            .get(reqwest::header::CONTENT_TYPE)
+            .and_then(|v| v.to_str().ok())
+            .unwrap_or("")
+            .to_ascii_lowercase();
+        let content_length = response.content_length();
+
+        // Check if this looks like a file response or just an HTML redirect/error
+        let is_file = looks_like_file_response(&content_type, content_length, selected.size)
+            || status == StatusCode::PARTIAL_CONTENT
+            || content_type.contains("application/force-download")
+            || content_type.contains("application/download");
+
+        if !is_file {
+            notes.push(format!(
+                "{} returned content-type: {}, length: {:?} — not a file",
+                sscm_url.url, content_type, content_length
+            ));
+            continue;
+        }
+
+        let is_partial = status == StatusCode::PARTIAL_CONTENT;
+        if !is_partial {
+            start_bytes = 0;
+        }
+
+        let bytes = save_response_body(
+            response,
+            &output_path,
+            selected.file_name.clone(),
+            selected.size,
+            start_bytes,
+            &progress_callback,
+            &options.cancellation_token,
+        )
+        .await?;
+
+        if let Some(token) = &options.cancellation_token {
+            if token.load(std::sync::atomic::Ordering::Relaxed) {
+                notes.push("download cancelled by user".to_string());
+                return Ok(report_for_selected(
+                    ProbeStatus::Cancelled,
+                    &selected,
+                    Some(start_bytes + bytes),
+                    None,
+                    None,
+                    Some(sscm_url.url.clone()),
+                    notes,
+                ));
+            }
+        }
+
+        let total_bytes = start_bytes + bytes;
+        notes.push(format!("downloaded {} bytes to {}", total_bytes, output_path.display()));
+
+        if total_bytes == selected.size {
+            notes.push("actual size matches expected size".to_string());
+        } else {
+            notes.push(format!(
+                "size mismatch: expected {}, actual {}",
+                selected.size, total_bytes
+            ));
+        }
+
+        return Ok(report_for_selected(
+            ProbeStatus::Downloaded,
+            &selected,
+            Some(total_bytes),
+            None,
+            None,
+            Some(sscm_url.url.clone()),
+            notes,
+        ));
+    }
+
+    notes.push("all SSCM download URLs failed".to_string());
+    Ok(report_for_selected(
+        ProbeStatus::Failed,
+        &selected,
+        None,
+        None,
+        None,
+        None,
+        notes,
+    ))
+}
+
+#[derive(Debug, Clone)]
+struct SscmDownloadUrl {
+    url: String,
+    is_post: bool,
+    form_data: Option<String>,
+}
+
+fn build_sscm_download_urls(
+    page_origin: &str,
+    selected: &SelectedFile,
+    release: &Value,
+) -> Vec<SscmDownloadUrl> {
+    let mut urls = Vec::new();
+
+    // Build form data from release fields and selected file
+    let mut form_parts: Vec<String> = Vec::new();
+    if let Some(obj) = release.as_object() {
+        for (key, value) in obj {
+            if key == "raonkFlag" {
+                continue;
+            }
+            if let Some(v) = value.as_str() {
+                form_parts.push(format!(
+                    "{}={}",
+                    urlencoding::encode(key),
+                    urlencoding::encode(v)
+                ));
+            }
+        }
+    }
+
+    // Add selected file params
+    form_parts.push(format!(
+        "selectFile={}",
+        urlencoding::encode("on")
+    ));
+    if let Some(stamp) = &selected.stamp {
+        let meta = format!(
+            "{}*{}*{}*{}*{}",
+            stamp,
+            selected.file_name,
+            selected.file_type.as_deref().unwrap_or(""),
+            selected.server_path,
+            selected.size
+        );
+        form_parts.push(format!(
+            "selectFileMeta={}",
+            urlencoding::encode(&meta)
+        ));
+    }
+    if let Some(binary_id) = &selected.binary_id {
+        form_parts.push(format!(
+            "selectFileBinaryId={}",
+            urlencoding::encode(binary_id)
+        ));
+    }
+    if let Some(file_id) = &selected.file_id {
+        form_parts.push(format!(
+            "selectFileId={}",
+            urlencoding::encode(file_id)
+        ));
+    }
+
+    let form_data = form_parts.join("&");
+
+    // Primary: SSCM download endpoint via form POST
+    urls.push(SscmDownloadUrl {
+        url: format!("{}/sscm/appm/srbin/pjt/srBinaryFileDownload.do", page_origin),
+        is_post: true,
+        form_data: Some(form_data.clone()),
+    });
+
+    // Fallback: common alternative paths
+    urls.push(SscmDownloadUrl {
+        url: format!(
+            "{}/sscm/appm/srbin/pjt/srBinaryReleaseFileDownload.do",
+            page_origin
+        ),
+        is_post: true,
+        form_data: Some(form_data.clone()),
+    });
+
+    // Fallback: direct GET with query params
+    urls.push(SscmDownloadUrl {
+        url: format!(
+            "{}/sscm/appm/srbin/pjt/srBinaryFileDownload.do?{}",
+            page_origin, form_data
+        ),
+        is_post: false,
+        form_data: None,
+    });
+
+    urls
 }
 
 pub async fn listen_for_payloads(options: PayloadListenOptions) -> Result<i32> {
@@ -678,6 +1012,7 @@ enum CandidateOutcome {
     Downloaded { path: PathBuf, bytes: u64 },
     Replayed { status: StatusCode },
     Ignored { reason: String },
+    Cancelled,
 }
 
 async fn try_candidate(
@@ -686,10 +1021,29 @@ async fn try_candidate(
     output_dir: &Path,
     selected: &SelectedFile,
     progress_callback: &Option<ProgressCallback>,
+    cancellation_token: &Option<std::sync::Arc<std::sync::atomic::AtomicBool>>,
 ) -> Result<CandidateOutcome> {
     let mut request = client.request(candidate.method.clone(), &candidate.url);
     if let Some(body) = &candidate.body {
         request = request.json(body);
+    }
+
+    let output_path = output_dir.join(&selected.file_name);
+    let mut start_bytes = 0u64;
+
+    if let Ok(metadata) = tokio::fs::metadata(&output_path).await {
+        if metadata.is_file() {
+            start_bytes = metadata.len();
+            if start_bytes > 0 && start_bytes < selected.size {
+                request = request.header("Range", format!("bytes={}-", start_bytes));
+            } else if start_bytes == selected.size {
+                // Already fully downloaded
+                return Ok(CandidateOutcome::Downloaded {
+                    path: output_path,
+                    bytes: start_bytes,
+                });
+            }
+        }
     }
 
     let response = request.send().await?;
@@ -707,19 +1061,32 @@ async fn try_candidate(
         .unwrap_or("")
         .to_ascii_lowercase();
     let content_length = response.content_length();
-    if looks_like_file_response(&content_type, content_length, selected.size) {
-        let output_path = output_dir.join(&selected.file_name);
+    if looks_like_file_response(&content_type, content_length, selected.size) || status == StatusCode::PARTIAL_CONTENT {
+        let is_partial = status == StatusCode::PARTIAL_CONTENT;
+        if !is_partial {
+            start_bytes = 0; // The server ignored the Range header
+        }
+
         let bytes = save_response_body(
             response,
             &output_path,
             selected.file_name.clone(),
             selected.size,
+            start_bytes,
             progress_callback,
+            cancellation_token,
         )
         .await?;
+
+        if let Some(token) = cancellation_token {
+            if token.load(std::sync::atomic::Ordering::Relaxed) {
+                return Ok(CandidateOutcome::Cancelled);
+            }
+        }
+
         return Ok(CandidateOutcome::Downloaded {
             path: output_path,
-            bytes,
+            bytes: start_bytes + bytes,
         });
     }
 
@@ -746,27 +1113,46 @@ async fn save_response_body(
     output_path: &Path,
     file_name: String,
     total_bytes: u64,
+    start_bytes: u64,
     progress_callback: &Option<ProgressCallback>,
+    cancellation_token: &Option<std::sync::Arc<std::sync::atomic::AtomicBool>>,
 ) -> Result<u64> {
-    let mut file = tokio::fs::File::create(output_path)
+    let mut options = tokio::fs::OpenOptions::new();
+    options.create(true).write(true);
+    if start_bytes > 0 {
+        options.append(true);
+    } else {
+        options.truncate(true);
+    }
+
+    let mut file = options.open(output_path)
         .await
-        .with_context(|| format!("failed to create {}", output_path.display()))?;
+        .with_context(|| format!("failed to create or open {}", output_path.display()))?;
+
     let mut stream = response.bytes_stream();
-    let mut total = 0u64;
+    let mut bytes_downloaded = 0u64;
+
     while let Some(chunk) = stream.next().await {
+        if let Some(token) = cancellation_token {
+            if token.load(std::sync::atomic::Ordering::Relaxed) {
+                break;
+            }
+        }
+
         let chunk = chunk?;
         file.write_all(&chunk).await?;
-        total += chunk.len() as u64;
+        bytes_downloaded += chunk.len() as u64;
+
         if let Some(callback) = progress_callback {
             callback(DownloadProgress {
                 file_name: file_name.clone(),
-                bytes_downloaded: total,
+                bytes_downloaded: start_bytes + bytes_downloaded,
                 total_bytes,
             });
         }
     }
     file.flush().await?;
-    Ok(total)
+    Ok(bytes_downloaded)
 }
 
 fn deserialize_size<'de, D>(deserializer: D) -> std::result::Result<u64, D::Error>
@@ -932,7 +1318,9 @@ mod tests {
             &output_path,
             "test_file.bin".to_string(),
             100,
+            0,
             &progress_callback,
+            &None,
         )
         .await
         .unwrap();

