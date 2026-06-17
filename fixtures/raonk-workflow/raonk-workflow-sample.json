@@ -1,0 +1,3972 @@
+[
+  {
+    "at": "2026-06-17T01:54:57.436Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do",
+    "kind": "spy-ready",
+    "detail": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:54:57.484Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_new/img/ico/ico_cal.png",
+    "requestId": "1226",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.485Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/css/common.css",
+    "requestId": "1227",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Tue, 16 Jun 2026 23:55:51 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/css"
+      },
+      {
+        "name": "Content-Length",
+        "value": "7190"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.486Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_new/img/ico/ico_cal.png",
+    "requestId": "1226",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Tue, 16 Jun 2026 23:55:51 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/png"
+      },
+      {
+        "name": "Content-Length",
+        "value": "1138"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.598Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/sw_txtBtn.png",
+    "requestId": "1228",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/ui_swvh/css/sw.css"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.600Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_new/img/ico/date_line.gif",
+    "requestId": "1229",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.601Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/sw_txtBtn.png",
+    "requestId": "1228",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Tue, 16 Jun 2026 23:55:52 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/png"
+      },
+      {
+        "name": "Content-Length",
+        "value": "18263"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.603Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/sw_btn.png",
+    "requestId": "1230",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/ui_swvh/css/sw.css"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.604Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_new/img/ico/date_line.gif",
+    "requestId": "1229",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Tue, 16 Jun 2026 23:55:52 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/gif"
+      },
+      {
+        "name": "Content-Length",
+        "value": "1095"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.605Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/right_sprites.gif",
+    "requestId": "1231",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/ui_swvh/css/sw.css"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.615Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/sw_btn.png",
+    "requestId": "1230",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Tue, 16 Jun 2026 23:55:52 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/png"
+      },
+      {
+        "name": "Content-Length",
+        "value": "11302"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:57.616Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/right_sprites.gif",
+    "requestId": "1231",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Tue, 16 Jun 2026 23:55:52 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/gif"
+      },
+      {
+        "name": "Content-Length",
+        "value": "1077"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:59.654Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "POST",
+    "url": "http://mdvh.sec.samsung.net/sscm/com/util/setListQueryString.do?undefined",
+    "requestId": "1236",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "X-Requested-With",
+        "value": "XMLHttpRequest"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "Accept",
+        "value": "application/json, text/javascript, */*; q=0.01"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/x-www-form-urlencoded; charset=UTF-8"
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Origin",
+        "value": "http://mdvh.sec.samsung.net"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "empty"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:59.673Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "POST",
+    "url": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/getReleaseListAjax.do",
+    "requestId": "1237",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "X-Requested-With",
+        "value": "XMLHttpRequest"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "Accept",
+        "value": "application/json, text/javascript, */*; q=0.01"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/x-www-form-urlencoded; charset=UTF-8"
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Origin",
+        "value": "http://mdvh.sec.samsung.net"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "empty"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:59.674Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/common/loading.gif",
+    "requestId": "1238",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:54:59.676Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/common/loading.gif",
+    "requestId": "1238",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:04 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/gif"
+      },
+      {
+        "name": "Content-Length",
+        "value": "22112"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:04.588Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "POST",
+    "url": "http://mdvh.sec.samsung.net/sscm/appm/srbin/com/srBinaryAuthAjax.do?pid=SR_BINARY_RELEASE_DETAIL00BWWJYZ0OBOE_0000&ptype=RELEASE",
+    "requestId": "1239",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "X-Requested-With",
+        "value": "XMLHttpRequest"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "Accept",
+        "value": "application/json, text/javascript, */*; q=0.01"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Origin",
+        "value": "http://mdvh.sec.samsung.net"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "empty"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:04.798Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do",
+    "kind": "xhr-response",
+    "detail": {
+      "method": "POST",
+      "url": "/sscm/appm/srbin/com/srBinaryAuthAjax.do?pid=SR_BINARY_RELEASE_DETAIL00BWWJYZ0OBOE_0000&ptype=RELEASE",
+      "status": 200,
+      "responseURL": "http://mdvh.sec.samsung.net/sscm/appm/srbin/com/srBinaryAuthAjax.do?pid=SR_BINARY_RELEASE_DETAIL00BWWJYZ0OBOE_0000&ptype=RELEASE",
+      "responseType": "",
+      "response": {
+        "preview": "{\"reAuth\":\"CANCEL\"}"
+      }
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:04.852Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "POST",
+    "url": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "requestId": "1240",
+    "headers": [
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "Upgrade-Insecure-Requests",
+        "value": "1"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/x-www-form-urlencoded"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "Origin",
+        "value": "http://mdvh.sec.samsung.net"
+      },
+      {
+        "name": "Accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "navigate"
+      },
+      {
+        "name": "Sec-Fetch-User",
+        "value": "?1"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "document"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseList.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.104Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/raonkupload.js",
+    "requestId": "1241",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "script"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.109Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/js/appm/com/file/raonkWrapper.js",
+    "requestId": "1243",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "script"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.109Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/raonkupload.js",
+    "requestId": "1241",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/javascript"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.113Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/js/appm/srbin/srbin.js",
+    "requestId": "1244",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "script"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.117Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/js/appm/com/file/raonkWrapper.js",
+    "requestId": "1243",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/javascript"
+      },
+      {
+        "name": "Content-Length",
+        "value": "14551"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.120Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_appm/img/selfVeri/ico_tip_t09.png",
+    "requestId": "1245",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.118Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "spy-ready",
+    "detail": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:06.125Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/js/appm/srbin/srbin.js",
+    "requestId": "1244",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/javascript"
+      },
+      {
+        "name": "Content-Length",
+        "value": "1510"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.126Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_appm/img/selfVeri/ico_tip_t09.png",
+    "requestId": "1245",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/png"
+      },
+      {
+        "name": "Content-Length",
+        "value": "697"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.143Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/config/raonkupload.config.txt?t=9c0f5f6716a44fa489c879d635911702",
+    "requestId": "1246",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "empty"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.137Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "xhr",
+    "detail": {
+      "method": "GET",
+      "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/config/raonkupload.config.txt?t=9c0f5f6716a44fa489c879d635911702",
+      "headers": {}
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:06.148Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/sw_icon.png",
+    "requestId": "1247",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/ui_swvh/css/common.css"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.149Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/ui_swvh/img/sw_icon.png",
+    "requestId": "1247",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/png"
+      },
+      {
+        "name": "Content-Length",
+        "value": "21414"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.181Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 122,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1248",
+    "headers": [
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "Upgrade-Insecure-Requests",
+        "value": "1"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "Accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "navigate"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "iframe"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.184Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 122,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1248",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/html"
+      },
+      {
+        "name": "Content-Length",
+        "value": "486"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.208Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 123,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1249",
+    "headers": [
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "Upgrade-Insecure-Requests",
+        "value": "1"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "Accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "navigate"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "iframe"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.213Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 123,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1249",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/html"
+      },
+      {
+        "name": "Content-Length",
+        "value": "486"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.227Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 124,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1250",
+    "headers": [
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "Upgrade-Insecure-Requests",
+        "value": "1"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "Accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "navigate"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "iframe"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.230Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 124,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1250",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/html"
+      },
+      {
+        "name": "Content-Length",
+        "value": "486"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.232Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 125,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1251",
+    "headers": [
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "Upgrade-Insecure-Requests",
+        "value": "1"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "Accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "navigate"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "iframe"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.234Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 126,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1252",
+    "headers": [
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "Upgrade-Insecure-Requests",
+        "value": "1"
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "Accept",
+        "value": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "navigate"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "iframe"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.235Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 125,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1251",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/html"
+      },
+      {
+        "name": "Content-Length",
+        "value": "486"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.237Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 126,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "requestId": "1252",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:11 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/html"
+      },
+      {
+        "name": "Content-Length",
+        "value": "486"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.251Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/config/raonkupload.config.txt?t=9c0f5f6716a44fa489c879d635911702",
+    "requestId": "1246",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 01:55:06 GMT"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/plain"
+      },
+      {
+        "name": "Content-Length",
+        "value": "5091"
+      },
+      {
+        "name": "Connection",
+        "value": "keep-alive"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.307Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/css/raonkupload.min.css?t=1929804801",
+    "requestId": "1253",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "text/css,*/*;q=0.1"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "style"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.311Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/css/raonkupload.min.css?t=1929804801",
+    "requestId": "1253",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:12 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/css"
+      },
+      {
+        "name": "Content-Length",
+        "value": "11106"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.311Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/css/raonkupload.context.min.css?t=1929804801",
+    "requestId": "1254",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "text/css,*/*;q=0.1"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "style"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.312Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/raonkupload.xhr.js?t=1929804801",
+    "requestId": "1255",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "script"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.312Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/raonkupload.core.js?t=1929804801",
+    "requestId": "1256",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "script"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.312Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/json2.min.js?t=1929804801",
+    "requestId": "1257",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "script"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.313Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/lang/en-us.js?t=1929804801",
+    "requestId": "1258",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "script"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.304Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "xhr-response",
+    "detail": {
+      "method": "GET",
+      "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/config/raonkupload.config.txt?t=9c0f5f6716a44fa489c879d635911702",
+      "status": 200,
+      "responseURL": "http://mdvh.sec.samsung.net/sscm/raonkupload/config/raonkupload.config.txt?t=9c0f5f6716a44fa489c879d635911702",
+      "responseType": "",
+      "response": {
+        "preview": "<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n<RaonKUpload>\n  <license><redacted></license>\n  <setting>\n    <runtimes desc=\"agent,html5\">agent</runtimes>\n    <width>800px</width>\n    <height desc=\"minHeight:120px,show_header_bar:0 일경우 minHeight:100px\">250px</height>\n    <!-- color1는 전체(메인/전송창) 버튼bg, 전송창 전체전송 progressbar bg, 전송창 전송 퍼센트 컬러 포함 / color2는 footer bg /color3는 전송창 progressbar bg  -->\n    <skin_name desc=\"bluegray,blue,red,green,orange,purple,silver,brown,darkgray,gold,gray,pink,yellow\" css_root_path=\"\" color1=\"\" color2=\"\" color3=\"\" text_color=\"\" webfile_color=\"\">bluegray</skin_name>\n    <lang>en-us</lang>\n    <mode views=\"list\" desc=\"views : list - 리스트형태로 보기, thumbs - 썸네일형태로 보기\">upload</mode>\n    <img_preview width=\"320px\" height=\"280px\">0</img_preview>\n    <show_status_bar show_limit=\"1\" show_status=\"1\" desc=\"1: 파일 제한 문구/현재 파일 상태 문구 보임, 0이면 숨김\">1</show_status_bar>\n    <show_header_bar header_height=\"28px\" desc=\"min header height:28px\">1</show_header_bar>\n    <header_item>\n      <item width=\"\" align=\"left\" desc=\"사용자 업로드 헤더 설정, width: 넓이값,align: 필드 정렬값(left, right, center)\"></item>\n    </header_item>    \n    <show_button_bar_edit align=\"left\" desc=\"버튼 위치 정렬 왼쪽 : left, 오른쪽 :right\"...<truncated>",
+        "hints": [
+          "<RaonKUpload>",
+          "<runtimes desc=\"agent,html5\">agent</runtimes>",
+          "<skin_name desc=\"bluegray,blue,red,green,orange,purple,silver,brown,darkgray,gold,gray,pink,yellow\" css_root_path=\"\" color1=\"\" color2=\"\" color3=\"\" text_color=\"\" webfile_color=\"\">bluegray</skin_name>",
+          "<mode views=\"list\" desc=\"views : list - 리스트형태로 보기, thumbs - 썸네일형태로 보기\">upload</mode>",
+          "<show_button_bar_edit align=\"left\" desc=\"버튼 위치 정렬 왼쪽 : left, 오른쪽 :right\">add,add_folder,send,remove,remove_all</show_button_bar_edit>",
+          "<show_button_bar_view align=\"left\" desc=\"버튼 위치 정렬 왼쪽 : left, 오른쪽 :right\">open,saveandopen,saveandfolderopen,download,download_all</show_button_bar_view>",
+          "<resume_mode upload=\"1\" download=\"1\"></resume_mode>",
+          "<folder_transfer>0</folder_transfer>",
+          "<item desc=\"선택된 파일 다운로드\">download_current_file</item>",
+          "<item desc=\"전체 다운로드\">download_all_file</item>",
+          "<item desc=\"폴더추가\">add_folder</item>",
+          "<item desc=\"다운로드 후 열기\">download_and_open</item>",
+          "<item desc=\"다운로드 후 폴더열기\">download_and_folder_open</item>",
+          "<use_script_event_control desc=\"agent에서 발생하는 이벤트를 javascript로 보내줌\">1</use_script_event_control>",
+          "<complete_event_reset_use desc=\"업로드 완료 이벤트에서 ResetUpload API 사용시 1로 설정해야함\">0</complete_event_reset_use>",
+          "<download_unchosen desc=\"0:파일 다운로드 시 선택된 파일이 없을 경우 alert창 활성, 1: 비활성\">0</download_unchosen>",
+          "<file_encrypt desc=\"agent 전용\">0</file_encrypt>",
+          "<use_before_download_event desc=\"0 : 파일 다운로드 전 event 발생 안함, 1: 취소 event 발생함\">1</use_before_download_event>",
+          "<use_download_complete_event desc=\"0 : 파일 다운로드 완료 후 event 발생안함, 1: event 발생함\">1</use_download_complete_event>",
+          "<use_download_complete_all_event desc=\"0 : 모든 파일 다운로드 완료 후 event 발생안함, 1: event 발생함\">1</use_download_complete_all_event>",
+          "<use_uploading_cancel_event desc=\"0 : 파일 전송 시 취소 event 발생 안함, 1: 취소 event 발생함\">1</use_uploading_cancel_event>",
+          "<use_agent_install_guide zindex=\"1000\">1</use_agent_install_guide>",
+          "<upload_transfer_window desc=\"업로드 전송창 UI 설정\" upload_window_mode=\"0\" download_window_mode=\"0\" desc2=\"0: Modal, 1: Modalless\">",
+          "<!--<use_logo_image desc=\"0: logo 숨김, 1: logo 보여줌\" logo_path=\"/kupload/config/samsung_logo.png\" logo_ver=\"5\">1</use_logo_image>-->",
+          "<silent_upload desc=\"전송 팝업창 노출 여부, 기본값은 0:노출, 1:미노출, 2:일시정지,취소버튼 미노출\">0</silent_upload>",
+          "<silent_download desc=\"다운로드 진행 팝업창 노출 여부, 기본값은 0:노출, 1:미노출, 2:일시정지,취소버튼 미노출\">0</silent_download>",
+          "<silent_download_ex desc=\"(웹표준 모드 전용) 다운로드 진행 팝업창 노출과 다운로드 된 파일사이즈 체크 여부, 기본값은 0:노출 및 체크, 1:노출 및 체크안함(after_download_event, finish_downloaded_event, downloadMulti 사용 불가능)\">0</silent_download_ex>",
+          "<system_title_upload>myProject</system_title_upload>",
+          "<system_title_download>myProject</system_title_download>",
+          "</upload_transfer_window>",
+          "<use_agent_log>2</use_agent_log>",
+          "<agent_event_wait_time>5</agent_event_wait_time>",
+          "<default_download_path desc=\"agent 전용\">-</default_download_path>",
+          "<agent_transfer_window_item_count>5</agent_transfer_window_item_count>",
+          "<use_kmonitoring polling_time=\"3\" url=\"http://10.195.20.163:80/raonkupload/handler/raonkmonitor.jsp\" part_url=\"http://10.195.20.165:80/kmonitor/raonkmonitor.jsp\">1</use_kmonitoring> <!-- 운영 -->",
+          "<!-- <use_kmonitoring polling_time=\"3\" url=\"http://10.195.21.228:9071/raonkupload/handler/raonkmonitor.jsp\" part_url=\"http://10.195.21.228:9081/kmonitor/raonkmonitor.jsp\">1</use_kmonitoring> --> <!-- 개발-->",
+          "<!-- <use_kmonitoring polling_time=\"3\" url=\"http://10.195.21.228:19071/raonkupload/handler/raonkmonitor.jsp\" part_url=\"http://10.195.21.228:19081/kmonitor/raonkmonitor.jsp\">1</use_kmonitoring> --> <!-- QA-->",
+          "<use_download_cache>1</use_download_cache>",
+          "<agent_transfer_type>0</agent_transfer_type>",
+          "<agent_admin>"
+        ]
+      }
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:06.315Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/css/raonkupload.context.min.css?t=1929804801",
+    "requestId": "1254",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:12 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/css"
+      },
+      {
+        "name": "Content-Length",
+        "value": "1916"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.316Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/raonkupload.xhr.js?t=1929804801",
+    "requestId": "1255",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:12 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/javascript"
+      },
+      {
+        "name": "Content-Length",
+        "value": "336"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.316Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/raonkupload.core.js?t=1929804801",
+    "requestId": "1256",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:12 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/javascript"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.317Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/json2.min.js?t=1929804801",
+    "requestId": "1257",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:12 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/javascript"
+      },
+      {
+        "name": "Content-Length",
+        "value": "1962"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.318Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/js/lang/en-us.js?t=1929804801",
+    "requestId": "1258",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:13 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/javascript"
+      },
+      {
+        "name": "Content-Length",
+        "value": "4066"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.377Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/images/loading2.gif",
+    "requestId": "1262",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.380Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/css/raonkupload.popup.min.css?t=1929804801",
+    "requestId": "1263",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "text/css,*/*;q=0.1"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "style"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.381Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/images/loading2.gif",
+    "requestId": "1262",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:13 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/gif"
+      },
+      {
+        "name": "Content-Length",
+        "value": "26343"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.386Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/agent/kversion.js?t=e58ad9f4b4a84453a697c6d1e401d765",
+    "requestId": "1261",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "*/*"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "empty"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.386Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/images/update.gif",
+    "requestId": "1264",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.386Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/css/raonkupload.popup.min.css?t=1929804801",
+    "requestId": "1263",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:13 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "text/css"
+      },
+      {
+        "name": "Content-Length",
+        "value": "8455"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.369Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "xhr",
+    "detail": {
+      "method": "GET",
+      "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/agent/kversion.js?t=e58ad9f4b4a84453a697c6d1e401d765",
+      "headers": {}
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:06.392Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/images/update.gif",
+    "requestId": "1264",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:13 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/gif"
+      },
+      {
+        "name": "Content-Length",
+        "value": "11154"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.417Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "kind": "spy-ready",
+    "detail": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 122
+  },
+  {
+    "at": "2026-06-17T01:55:06.428Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "kind": "spy-ready",
+    "detail": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 123
+  },
+  {
+    "at": "2026-06-17T01:55:06.428Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "kind": "spy-ready",
+    "detail": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 124
+  },
+  {
+    "at": "2026-06-17T01:55:06.429Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "kind": "spy-ready",
+    "detail": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 125
+  },
+  {
+    "at": "2026-06-17T01:55:06.443Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/jsp/oboe/foundation/tags/webeditor/viewWebEditorTemplate.html",
+    "kind": "spy-ready",
+    "detail": {
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 126
+  },
+  {
+    "at": "2026-06-17T01:55:06.493Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/agent/kversion.js?t=e58ad9f4b4a84453a697c6d1e401d765",
+    "requestId": "1261",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 01:55:06 GMT"
+      },
+      {
+        "name": "Content-Type",
+        "value": "application/javascript"
+      },
+      {
+        "name": "Content-Length",
+        "value": "176"
+      },
+      {
+        "name": "Connection",
+        "value": "keep-alive"
+      },
+      {
+        "name": "Content-Encoding",
+        "value": "gzip"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      },
+      {
+        "name": "Vary",
+        "value": "Accept-Encoding"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.529Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "xhr-response",
+    "detail": {
+      "method": "GET",
+      "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/agent/kversion.js?t=e58ad9f4b4a84453a697c6d1e401d765",
+      "status": 200,
+      "responseURL": "http://mdvh.sec.samsung.net/sscm/raonkupload/agent/kversion.js?t=e58ad9f4b4a84453a697c6d1e401d765",
+      "responseType": "",
+      "response": {
+        "preview": "var kversion = {\n    \"agent\": \"2018,0,2,93\",\n    \"upload\": \"2018,0,0,148\"\n}"
+      }
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:06.596Z",
+    "kind": "request-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/images/loading.gif",
+    "requestId": "1274",
+    "headers": [
+      {
+        "name": "sec-ch-ua-platform",
+        "value": "\"Windows\""
+      },
+      {
+        "name": "User-Agent",
+        "value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36 Edg/149.0.0.0"
+      },
+      {
+        "name": "sec-ch-ua",
+        "value": "\"Microsoft Edge\";v=\"149\", \"Chromium\";v=\"149\", \"Not)A;Brand\";v=\"24\""
+      },
+      {
+        "name": "sec-ch-ua-mobile",
+        "value": "?0"
+      },
+      {
+        "name": "Accept",
+        "value": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      {
+        "name": "Sec-Fetch-Site",
+        "value": "same-origin"
+      },
+      {
+        "name": "Sec-Fetch-Mode",
+        "value": "no-cors"
+      },
+      {
+        "name": "Sec-Fetch-Dest",
+        "value": "image"
+      },
+      {
+        "name": "Referer",
+        "value": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do"
+      },
+      {
+        "name": "Accept-Encoding",
+        "value": "gzip, deflate"
+      },
+      {
+        "name": "Accept-Language",
+        "value": "en-US,en;q=0.9"
+      },
+      {
+        "name": "Cookie",
+        "value": "<redacted>"
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:06.597Z",
+    "kind": "response-headers",
+    "tabId": 249803512,
+    "frameId": 0,
+    "method": "GET",
+    "url": "http://mdvh.sec.samsung.net/sscm/raonkupload/images/loading.gif",
+    "requestId": "1274",
+    "statusCode": 200,
+    "statusLine": "HTTP/1.1 200 OK",
+    "headers": [
+      {
+        "name": "Date",
+        "value": "Wed, 17 Jun 2026 00:34:13 GMT"
+      },
+      {
+        "name": "Accept-Ranges",
+        "value": "bytes"
+      },
+      {
+        "name": "Server",
+        "value": ""
+      },
+      {
+        "name": "X-Powered-By",
+        "value": "ASP.NET"
+      },
+      {
+        "name": "Content-Type",
+        "value": "image/gif"
+      },
+      {
+        "name": "Content-Length",
+        "value": "9669"
+      },
+      {
+        "name": "Last-Modified",
+        "value": "Thu, 04 Jun 2026 09:12:45 GMT"
+      },
+      {
+        "name": "ETag",
+        "value": "\"80e4ff4d2f4dc1:0\""
+      }
+    ]
+  },
+  {
+    "at": "2026-06-17T01:55:09.122Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "window-symbols",
+    "detail": {
+      "symbols": [
+        {
+          "name": "kupload_user_config",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUpload_Config",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUpload",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUPLOAD",
+          "type": "object"
+        },
+        {
+          "name": "RAONKSolution",
+          "type": "object"
+        },
+        {
+          "name": "raonkUploadFileInfo",
+          "type": "object"
+        },
+        {
+          "name": "RAONKUPLOAD_CreationComplete",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUPLOAD_OnError",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUPLOAD_BeforeUpload",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUPLOAD_BeforeDownloadFile",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUPLOAD_BeforeOpenFile",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUPLOAD_BeforeAddFile",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUPLOAD_AfterAddFile",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUPLOAD_AfterAddAllFile",
+          "type": "function"
+        },
+        {
+          "name": "RAONKUPLOAD_UploadComplete",
+          "type": "function"
+        },
+        {
+          "name": "raonkFc",
+          "type": "object"
+        },
+        {
+          "name": "raonkServerDataPath",
+          "type": "string"
+        },
+        {
+          "name": "downloadRaonkFile",
+          "type": "function"
+        },
+        {
+          "name": "KUPLOADWIN",
+          "type": "object"
+        },
+        {
+          "name": "KUPLOADDOC",
+          "type": "object"
+        },
+        {
+          "name": "KUPLOADTOP",
+          "type": "object"
+        },
+        {
+          "name": "G_CURRKUPLOADER",
+          "type": "object"
+        }
+      ]
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:14.184Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "download-click",
+    "detail": {
+      "tag": "A",
+      "text": "Download",
+      "href": null,
+      "id": "btnFileDownload",
+      "className": "",
+      "outerHTML": "<a id=\"btnFileDownload\">Download</a>"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:14.185Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "download-state-snapshot",
+    "detail": {
+      "fields": [
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "releaseInfoVo.releaseId",
+          "id": "releaseInfoVo.releaseId",
+          "className": "",
+          "checked": false,
+          "value": "SR_BINARY_RELEASE00BWWJX6FOBOE_0000"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "releaseInfoVo.releaseDetailId",
+          "id": "releaseInfoVo.releaseDetailId",
+          "className": "",
+          "checked": false,
+          "value": "SR_BINARY_RELEASE_DETAIL00BWWJYZ0OBOE_0000"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "releaseInfoVo.cscOpVersionInfoId",
+          "id": "releaseInfoVo.cscOpVersionInfoId",
+          "className": "",
+          "checked": false,
+          "value": "SR_BINARY_REG00BWWJXCUOBOE_0000"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "releaseInfoVo.codeOpVersionInfoId",
+          "id": "releaseInfoVo.codeOpVersionInfoId",
+          "className": "",
+          "checked": false,
+          "value": "SR_BINARY_REG00BWWJX91OBOE_0000"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "releaseInfoVo.bbOpVersionInfoId",
+          "id": "releaseInfoVo.bbOpVersionInfoId",
+          "className": "",
+          "checked": false,
+          "value": "SR_BINARY_REG00BWWJXBQOBOE_0000"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "releaseInfoVo.contentsOpVersionInfoId",
+          "id": "releaseInfoVo.contentsOpVersionInfoId",
+          "className": "",
+          "checked": false,
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "releaseInfoVo.lpdOpVersionInfoId",
+          "id": "releaseInfoVo.lpdOpVersionInfoId",
+          "className": "",
+          "checked": false,
+          "value": ""
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "approvalId",
+          "id": "approvalId",
+          "className": "",
+          "checked": false,
+          "value": "00BWWJXEDOBOE_0000"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "releaseInfoVo.isOpenBinary",
+          "id": "releaseInfoVo.isOpenBinary",
+          "className": "",
+          "checked": false,
+          "value": "Y"
+        },
+        {
+          "tag": "INPUT",
+          "type": "hidden",
+          "name": "raonkFlag",
+          "id": "raonkFlag",
+          "className": "",
+          "checked": false,
+          "value": "N"
+        },
+        {
+          "tag": "INPUT",
+          "type": "checkbox",
+          "name": "binaryuserCP",
+          "id": "binaryuserCP",
+          "className": "checkSub binaryuser",
+          "checked": true,
+          "value": "on"
+        },
+        {
+          "tag": "INPUT",
+          "type": "checkbox",
+          "name": "selectFile",
+          "id": "selectFile",
+          "className": "binaryuserCP",
+          "checked": true,
+          "value": "on"
+        }
+      ],
+      "selectedFiles": [
+        {
+          "checkboxClass": "binaryuserCP",
+          "checkboxId": "selectFile",
+          "stamp": "202606111938382792942282674",
+          "fileName": "CP_A146PXXSIEZF3_CP34844848_MQB110796899_REV00_user_low_ship_MULTI_CERT.tar.md5",
+          "fileType": "QB FILE",
+          "serverPath": "F:/SSCM_FILE/202606/OUTPUT_QB/20260611193838279-ndklynbellibboyfvbeo.qb",
+          "size": "38441070",
+          "binaryId": "SR_BINARY_REG00BWWJXBQOBOE_0000",
+          "fileId": "OP_FILE00BWWJXBMOBOE_0000"
+        }
+      ],
+      "raonkGlobals": {
+        "raonkUploadFileInfo": [],
+        "raonkServerDataPath": "F:/SSCM_FILE/202606/OUTPUT/",
+        "raonkFc": {
+          "makeComponent": "<function makeComponent>",
+          "getCookieUrl": "<redacted>",
+          "setJSESSIONID": "<redacted>",
+          "RAONKCheck": "<function RAONKCheck>",
+          "checkSameNameFiles": "<function checkSameNameFiles>",
+          "selectRaonKFiles": "<function selectRaonKFiles>",
+          "copyUploadFile": "<function copyUploadFile>",
+          "ins_row_raonk": "<function ins_row_raonk>",
+          "splitData": "<function splitData>",
+          "myRound": "<function myRound>",
+          "convertAttachSize": "<function convertAttachSize>",
+          "filenameDec": "<function filenameDec>",
+          "filenameEnc": "<function filenameEnc>",
+          "getTimestamp": "<function getTimestamp>",
+          "initRaonKWebPluginForUpload": "<function initRaonKWebPluginForUpload>",
+          "UploadFile_raonk": "<function UploadFile_raonk>",
+          "SaveRaonkFile": "<function SaveRaonkFile>",
+          "deleteRaonKFiles": "<function deleteRaonKFiles>",
+          "deleteExistentFilesByQB": "<function deleteExistentFilesByQB>",
+          "remakeRaonKUploadFiles": "<function remakeRaonKUploadFiles>",
+          "checkboxAllSelect": "<function checkboxAllSelect>",
+          "reCalculateFileSize": "<function reCalculateFileSize>",
+          "executeServerFile": "<function executeServerFile>",
+          "remoteUploadFile": "<function remoteUploadFile>",
+          "getRaonkfileNameList": "<function getRaonkfileNameList>",
+          "getAddedRaonkfileNameList": "<function getAddedRaonkfileNameList>",
+          "isChangeRaonk": "<function isChangeRaonk>",
+          "fileMandatoryCheck": "<function fileMandatoryCheck>",
+          "setDownloadFiles": "<function setDownloadFiles>",
+          "openDownloadDialog": "<function openDownloadDialog>",
+          "downloadFiles": "<function downloadFiles>",
+          "downloadFilesMeta": "<function downloadFilesMeta>",
+          "deleteAllFiles": "<function deleteAllFiles>",
+          "buttonControl": "<function buttonControl>",
+          "selectQuickBuildFile": "<function selectQuickBuildFile>",
+          "quickBuildCallback": "<function quickBuildCallback>",
+          "quickBuildCallbackByOneClick": "<function quickBuildCallbackByOneClick>",
+          "uploadQuickBuild": "<function uploadQuickBuild>",
+          "viewQuickBuildStatus": "<function viewQuickBuildStatus>",
+          "uploadQuickBuildStatus": "<function uploadQuickBuildStatus>",
+          "quickBuildStatusUpdate": "<function quickBuildStatusUpdate>",
+          "quickBuildRaonkUploadCheck": "<function quickBuildRaonkUploadCheck>",
+          "quickBuildUploadCheck": "<function quickBuildUploadCheck>",
+          "viewQuickBuildStatusMass": "<function viewQuickBuildStatusMass>"
+        },
+        "RAONKUPLOAD": {
+          "rootPath": "http://mdvh.sec.samsung.net/sscm/raonkupload/",
+          "version": "RAON K Upload",
+          "UrlStamp": "1929804801"
+        },
+        "RAONKSolutionAgent": {
+          "connectedPort": "47317",
+          "managerFinalUrl": "",
+          "isLoaded": true
+        }
+      }
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:14.186Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "raonk-window-call",
+    "detail": {
+      "name": "selectFileDownload",
+      "args": []
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:14.189Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "raonk-window-call",
+    "detail": {
+      "name": "RAONKUPLOAD_BeforeDownloadFile",
+      "args": [
+        "kupload",
+        {
+          "strIsWebFile": "1",
+          "strKey": 0,
+          "strName": "CP_A146PXXSIEZF3_CP34844848_MQB110796899_REV00_user_low_ship_MULTI_CERT.tar.md5",
+          "strPath": "F:/SSCM_FILE/202606/OUTPUT_QB/20260611193838279-ndklynbellibboyfvbeo.qb",
+          "strIsLargeFile": "0",
+          "strIsLast": "1",
+          "strCmd": "downloadAll"
+        }
+      ]
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:14.189Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "raonk-window-call:return",
+    "detail": {
+      "name": "RAONKUPLOAD_BeforeDownloadFile"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  },
+  {
+    "at": "2026-06-17T01:55:14.198Z",
+    "location": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "kind": "raonk-window-call:return",
+    "detail": {
+      "name": "selectFileDownload"
+    },
+    "tabId": 249803512,
+    "tabUrl": "http://mdvh.sec.samsung.net/sscm/appm/srbin/pjt/srBinaryReleaseDetail.do",
+    "frameId": 0
+  }
+]

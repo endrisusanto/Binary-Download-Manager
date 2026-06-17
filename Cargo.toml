@@ -1,0 +1,8 @@
+[workspace]
+members = ["tools/mdvh-agent-probe"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+authors = ["Endri Susanto"]
+license = "MIT"
