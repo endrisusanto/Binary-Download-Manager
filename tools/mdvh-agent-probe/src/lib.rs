@@ -572,6 +572,14 @@ async fn find_reachable_agent(
     hosts: &[String],
     ports: &[CandidatePort],
 ) -> Option<AgentBase> {
+    // Build a fast client for local agent discovery to avoid long timeouts on closed ports
+    let discovery_client = Client::builder()
+        .timeout(Duration::from_millis(500))
+        .connect_timeout(Duration::from_millis(200))
+        .danger_accept_invalid_certs(true)
+        .build()
+        .unwrap_or_else(|_| client.clone());
+
     for port in ports {
         for host in hosts {
             let base = format!("{host}:{}", port.number);
@@ -584,7 +592,7 @@ async fn find_reachable_agent(
             ];
             for endpoint in endpoints {
                 let url = format!("{base}{endpoint}");
-                let Ok(response) = client.get(&url).send().await else {
+                let Ok(response) = discovery_client.get(&url).send().await else {
                     continue;
                 };
                 if port.trusted || response_has_raon_fingerprint(response).await {

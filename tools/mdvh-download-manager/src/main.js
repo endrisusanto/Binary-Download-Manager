@@ -58,22 +58,36 @@ function formatBytes(bytes, decimals = 2) {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
 }
 
+function updateListenerStatusUI(payload) {
+  const dot = listenerStatusEl.querySelector(".status-dot");
+  const text = listenerStatusEl.querySelector(".status-text");
+
+  if (payload.active) {
+    dot.className = "status-dot online";
+    text.textContent = `Active: ${payload.bind}`;
+  } else if (payload.error) {
+    dot.className = "status-dot offline";
+    text.textContent = "Offline (Port occupied)";
+    console.error(payload.error);
+  } else {
+    dot.className = "status-dot offline";
+    text.textContent = "Connecting...";
+  }
+}
+
 async function setupTauriListeners() {
   // 1. Connection status listener
   await listen("listener-status", (event) => {
-    const payload = event.payload;
-    const dot = listenerStatusEl.querySelector(".status-dot");
-    const text = listenerStatusEl.querySelector(".status-text");
-
-    if (payload.active) {
-      dot.className = "status-dot online";
-      text.textContent = `Active: ${payload.bind}`;
-    } else {
-      dot.className = "status-dot offline";
-      text.textContent = "Offline (Port occupied)";
-      console.error(payload.error);
-    }
+    updateListenerStatusUI(event.payload);
   });
+
+  // Query initial listener status from backend
+  try {
+    const status = await invoke("get_listener_status");
+    updateListenerStatusUI(status);
+  } catch (err) {
+    console.error("Failed to query listener status:", err);
+  }
 
   // 2. Download started listener
   await listen("download-started", (event) => {

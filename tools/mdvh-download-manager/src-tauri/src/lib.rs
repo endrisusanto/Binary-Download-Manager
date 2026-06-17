@@ -9,6 +9,24 @@ use tauri::{AppHandle, Emitter, Manager};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpListener;
 
+struct ListenerStatusState {
+    active: std::sync::atomic::AtomicBool,
+    bind: std::sync::Mutex<String>,
+    error: std::sync::Mutex<Option<String>>,
+}
+
+#[tauri::command]
+fn get_listener_status(state: tauri::State<'_, ListenerStatusState>) -> serde_json::Value {
+    let active = state.active.load(std::sync::atomic::Ordering::SeqCst);
+    let bind = state.bind.lock().unwrap().clone();
+    let error = state.error.lock().unwrap().clone();
+    serde_json::json!({
+        "active": active,
+        "bind": bind,
+        "error": error
+    })
+}
+
 #[tauri::command]
 fn open_download_folder(app: AppHandle) -> Result<(), String> {
     use tauri_plugin_opener::OpenerExt;
@@ -26,8 +44,12 @@ fn open_download_folder(app: AppHandle) -> Result<(), String> {
 
 async fn start_payload_listener(app_handle: AppHandle, port: u16) {
     let bind_addr = format!("127.0.0.1:{}", port);
+    let state = app_handle.state::<ListenerStatusState>();
+    *state.bind.lock().unwrap() = bind_addr.clone();
+
     let listener = match TcpListener::bind(&bind_addr).await {
         Ok(l) => {
+            state.active.store(true, std::sync::atomic::Ordering::SeqCst);
             let _ = app_handle.emit(
                 "listener-status",
                 serde_json::json!({
@@ -38,6 +60,8 @@ async fn start_payload_listener(app_handle: AppHandle, port: u16) {
             l
         }
         Err(e) => {
+            state.active.store(false, std::sync::atomic::Ordering::SeqCst);
+            *state.error.lock().unwrap() = Some(e.to_string());
             let _ = app_handle.emit(
                 "listener-status",
                 serde_json::json!({
@@ -238,6 +262,11 @@ pub fn run() {
     }
 
     tauri::Builder::default()
+        .manage(ListenerStatusState {
+            active: std::sync::atomic::AtomicBool::new(false),
+            bind: std::sync::Mutex::new("".to_string()),
+            error: std::sync::Mutex::new(None),
+        })
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             let handle = app.handle().clone();
@@ -296,7 +325,7 @@ pub fn run() {
                 let _ = window.hide();
             }
         })
-        .invoke_handler(tauri::generate_handler![open_download_folder])
+        .invoke_handler(tauri::generate_handler![open_download_folder, get_listener_status])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
