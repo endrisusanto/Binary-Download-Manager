@@ -250,7 +250,14 @@ pub async fn run_probe(
     progress_callback: Option<ProgressCallback>,
 ) -> Result<ProbeReport> {
     let metadata = parse_workflow_file(&options.workflow_json)?;
-    println!("[DEBUG BDM] run_probe: Started for file: {}", metadata.selected_files.first().map(|f| f.file_name.as_str()).unwrap_or(""));
+    println!(
+        "[DEBUG BDM] run_probe: Started for file: {}",
+        metadata
+            .selected_files
+            .first()
+            .map(|f| f.file_name.as_str())
+            .unwrap_or("")
+    );
     let selected = metadata
         .selected_files
         .first()
@@ -445,7 +452,10 @@ pub async fn run_direct_download(
 
         println!("[DEBUG BDM] Direct download trying URL: {}", sscm_url.url);
         if sscm_url.is_post {
-            println!("[DEBUG BDM] Request Method: POST, Form Data: {:?}", sscm_url.form_data);
+            println!(
+                "[DEBUG BDM] Request Method: POST, Form Data: {:?}",
+                sscm_url.form_data
+            );
         } else {
             println!("[DEBUG BDM] Request Method: GET");
         }
@@ -482,7 +492,7 @@ pub async fn run_direct_download(
 
         let status = response.status();
         println!("[DEBUG BDM] HTTP Status: {}", status);
-        
+
         if !status.is_success() && status != StatusCode::PARTIAL_CONTENT {
             notes.push(format!(
                 "{} returned HTTP {}",
@@ -503,7 +513,10 @@ pub async fn run_direct_download(
             .unwrap_or("")
             .to_ascii_lowercase();
         let content_length = response.content_length();
-        println!("[DEBUG BDM] Content-Type: {}, Content-Length: {:?}", content_type, content_length);
+        println!(
+            "[DEBUG BDM] Content-Type: {}, Content-Length: {:?}",
+            content_type, content_length
+        );
 
         // Check if this looks like a file response or just an HTML redirect/error
         let is_file = looks_like_file_response(&content_type, content_length, selected.size)
@@ -516,9 +529,15 @@ pub async fn run_direct_download(
             let limit = body_text.len().min(500);
             notes.push(format!(
                 "{} returned content-type: {}, length: {:?} — not a file. Preview: {}",
-                sscm_url.url, content_type, content_length, &body_text[..limit]
+                sscm_url.url,
+                content_type,
+                content_length,
+                &body_text[..limit]
             ));
-            println!("[DEBUG BDM] Not a file response! Preview: {}", &body_text[..limit]);
+            println!(
+                "[DEBUG BDM] Not a file response! Preview: {}",
+                &body_text[..limit]
+            );
             continue;
         }
 

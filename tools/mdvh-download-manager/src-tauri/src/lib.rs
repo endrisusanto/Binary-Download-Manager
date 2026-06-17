@@ -380,16 +380,28 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
             });
             let progress_callback = Some(callback);
 
-            let is_direct = metadata.raonk_flag.as_deref() == Some("N") || 
-                metadata.release.as_ref()
+            let is_direct = metadata.raonk_flag.as_deref() == Some("N")
+                || metadata
+                    .release
+                    .as_ref()
                     .and_then(|r| r.get("raonkFlag"))
-                    .and_then(|rf| rf.as_str()) == Some("N");
+                    .and_then(|rf| rf.as_str())
+                    == Some("N");
 
-            println!("[DEBUG BDM] Triggering download for file: {}", selected.file_name);
+            println!(
+                "[DEBUG BDM] Triggering download for file: {}",
+                selected.file_name
+            );
             println!("[DEBUG BDM] Metadata raonk_flag: {:?}", metadata.raonk_flag);
-            println!("[DEBUG BDM] Metadata release raonkFlag: {:?}", metadata.release.as_ref().and_then(|r| r.get("raonkFlag")));
+            println!(
+                "[DEBUG BDM] Metadata release raonkFlag: {:?}",
+                metadata.release.as_ref().and_then(|r| r.get("raonkFlag"))
+            );
             println!("[DEBUG BDM] Page origin: {:?}", metadata.page_origin);
-            println!("[DEBUG BDM] Cookies present: {}", metadata.cookies.is_some() && !metadata.cookies.as_ref().unwrap().is_empty());
+            println!(
+                "[DEBUG BDM] Cookies present: {}",
+                metadata.cookies.is_some() && !metadata.cookies.as_ref().unwrap().is_empty()
+            );
             println!("[DEBUG BDM] Decision is_direct = {}", is_direct);
 
             tokio::spawn(async move {
@@ -401,7 +413,10 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
                     run_probe(options, progress_callback).await
                 };
 
-                println!("[DEBUG BDM] Result for {}: {:?}", selected_clone.file_name, result);
+                println!(
+                    "[DEBUG BDM] Result for {}: {:?}",
+                    selected_clone.file_name, result
+                );
 
                 match result {
                     Ok(report) => {
