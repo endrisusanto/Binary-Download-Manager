@@ -205,7 +205,9 @@ pub fn parse_workflow_json(contents: &str) -> Result<WorkflowMetadata> {
             connected_port,
         })
     } else {
-        Err(anyhow!("workflow JSON must be either an array of events or a payload object"))
+        Err(anyhow!(
+            "workflow JSON must be either an array of events or a payload object"
+        ))
     }
 }
 
@@ -912,11 +914,20 @@ mod tests {
         let progress_updates = std::sync::Arc::new(std::sync::Mutex::new(Vec::new()));
         let progress_updates_clone = progress_updates.clone();
 
-        let progress_callback: Option<ProgressCallback> = Some(std::sync::Arc::new(move |progress| {
-            progress_updates_clone.lock().unwrap().push(progress);
-        }));
+        let progress_callback: Option<ProgressCallback> =
+            Some(std::sync::Arc::new(move |progress| {
+                progress_updates_clone.lock().unwrap().push(progress);
+            }));
 
-        let bytes = save_response_body(res, &output_path, "test_file.bin".to_string(), 100, &progress_callback).await.unwrap();
+        let bytes = save_response_body(
+            res,
+            &output_path,
+            "test_file.bin".to_string(),
+            100,
+            &progress_callback,
+        )
+        .await
+        .unwrap();
         assert_eq!(bytes, 100);
 
         let updates = progress_updates.lock().unwrap();
