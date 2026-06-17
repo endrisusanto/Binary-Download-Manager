@@ -2116,7 +2116,7 @@ dependencies = [
 
 [[package]]
 name = "mdvh-agent-probe"
-version = "0.1.12"
+version = "0.1.13"
 dependencies = [
  "anyhow",
  "clap",
@@ -4291,7 +4291,7 @@ checksum = "756daf9b1013ebe47a8776667b466417e2d4c5679d441c26230efd9ef78692db"
 
 [[package]]
 name = "toolsmdvh-download-manager"
-version = "0.1.12"
+version = "0.1.13"
 dependencies = [
  "anyhow",
  "mdvh-agent-probe",
