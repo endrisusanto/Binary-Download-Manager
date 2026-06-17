@@ -64,6 +64,8 @@ pub struct ProbeReport {
     pub actual_size: Option<u64>,
     #[serde(rename = "agentPort")]
     pub agent_port: Option<u16>,
+    #[serde(rename = "agentBaseUrl")]
+    pub agent_base_url: Option<String>,
     pub endpoint: Option<String>,
     pub notes: Vec<String>,
 }
@@ -93,6 +95,7 @@ impl ProbeReport {
 pub struct ProbeOptions {
     pub workflow_json: PathBuf,
     pub output_dir: PathBuf,
+    pub host: Option<String>,
     pub port: Option<u16>,
     pub timeout: Duration,
 }
@@ -102,6 +105,12 @@ struct CandidateEndpoint {
     method: Method,
     url: String,
     body: Option<Value>,
+}
+
+#[derive(Debug, Clone)]
+struct AgentBase {
+    url: String,
+    port: u16,
 }
 
 pub fn parse_workflow_file(path: &Path) -> Result<WorkflowMetadata> {
@@ -167,11 +176,12 @@ pub async fn run_probe(options: ProbeOptions) -> Result<ProbeReport> {
         selected.file_name, selected.server_path
     ));
 
-    let Some(port) = find_reachable_agent(&client, &ports).await else {
+    let hosts = candidate_hosts(options.host.as_deref());
+    let Some(agent_base) = find_reachable_agent(&client, &hosts, &ports).await else {
         let port_numbers: Vec<u16> = ports.iter().map(|port| port.number).collect();
         notes.push(format!(
-            "agent unreachable on candidate ports {:?}",
-            port_numbers
+            "agent unreachable on candidate hosts {:?} and ports {:?}",
+            hosts, port_numbers
         ));
         return Ok(report_for_selected(
             ProbeStatus::Failed,
@@ -179,16 +189,17 @@ pub async fn run_probe(options: ProbeOptions) -> Result<ProbeReport> {
             None,
             None,
             None,
+            None,
             notes,
         ));
     };
 
-    notes.push(format!("agent reachable on 127.0.0.1:{port}"));
+    notes.push(format!("agent reachable on {}", agent_base.url));
     tokio::fs::create_dir_all(&options.output_dir)
         .await
         .with_context(|| format!("failed to create {}", options.output_dir.display()))?;
 
-    let candidates = build_candidate_endpoints(port, &selected);
+    let candidates = build_candidate_endpoints(&agent_base.url, &selected);
     let mut reachable_endpoint = None;
     for candidate in candidates {
         match try_candidate(&client, &candidate, &options.output_dir, &selected).await {
@@ -200,7 +211,8 @@ pub async fn run_probe(options: ProbeOptions) -> Result<ProbeReport> {
                         ProbeStatus::Downloaded,
                         &selected,
                         Some(bytes),
-                        Some(port),
+                        Some(agent_base.port),
+                        Some(agent_base.url),
                         Some(candidate.url),
                         notes,
                     ));
@@ -213,7 +225,8 @@ pub async fn run_probe(options: ProbeOptions) -> Result<ProbeReport> {
                     ProbeStatus::EndpointFound,
                     &selected,
                     Some(bytes),
-                    Some(port),
+                    Some(agent_base.port),
+                    Some(agent_base.url),
                     Some(candidate.url),
                     notes,
                 ));
@@ -239,7 +252,8 @@ pub async fn run_probe(options: ProbeOptions) -> Result<ProbeReport> {
         },
         &selected,
         None,
-        Some(port),
+        Some(agent_base.port),
+        Some(agent_base.url),
         reachable_endpoint,
         notes,
     ))
@@ -250,6 +264,7 @@ fn report_for_selected(
     selected: &SelectedFile,
     actual_size: Option<u64>,
     agent_port: Option<u16>,
+    agent_base_url: Option<String>,
     endpoint: Option<String>,
     notes: Vec<String>,
 ) -> ProbeReport {
@@ -260,9 +275,31 @@ fn report_for_selected(
         expected_size: Some(selected.size),
         actual_size,
         agent_port,
+        agent_base_url,
         endpoint,
         notes,
     }
+}
+
+fn candidate_hosts(manual: Option<&str>) -> Vec<String> {
+    let mut hosts = Vec::new();
+    if let Some(host) = manual {
+        let trimmed = host.trim().trim_end_matches('/');
+        if !trimmed.is_empty() {
+            hosts.push(trimmed.to_string());
+        }
+    }
+    for host in [
+        "http://127.0.0.1",
+        "http://localhost",
+        "https://127.0.0.1",
+        "https://localhost",
+    ] {
+        if !hosts.iter().any(|value| value == host) {
+            hosts.push(host.to_string());
+        }
+    }
+    hosts
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -291,23 +328,32 @@ fn candidate_ports(manual: Option<u16>, captured: Option<u16>) -> Vec<CandidateP
         .collect()
 }
 
-async fn find_reachable_agent(client: &Client, ports: &[CandidatePort]) -> Option<u16> {
+async fn find_reachable_agent(
+    client: &Client,
+    hosts: &[String],
+    ports: &[CandidatePort],
+) -> Option<AgentBase> {
     for port in ports {
-        let base = format!("http://127.0.0.1:{}", port.number);
-        let endpoints = [
-            "/",
-            "/version",
-            "/kversion",
-            "/raonk/version",
-            "/kupload/version",
-        ];
-        for endpoint in endpoints {
-            let url = format!("{base}{endpoint}");
-            let Ok(response) = client.get(&url).send().await else {
-                continue;
-            };
-            if port.trusted || response_has_raon_fingerprint(response).await {
-                return Some(port.number);
+        for host in hosts {
+            let base = format!("{host}:{}", port.number);
+            let endpoints = [
+                "/",
+                "/version",
+                "/kversion",
+                "/raonk/version",
+                "/kupload/version",
+            ];
+            for endpoint in endpoints {
+                let url = format!("{base}{endpoint}");
+                let Ok(response) = client.get(&url).send().await else {
+                    continue;
+                };
+                if port.trusted || response_has_raon_fingerprint(response).await {
+                    return Some(AgentBase {
+                        url: base,
+                        port: port.number,
+                    });
+                }
             }
         }
     }
@@ -335,8 +381,7 @@ async fn response_has_raon_fingerprint(response: Response) -> bool {
     }
 }
 
-fn build_candidate_endpoints(port: u16, selected: &SelectedFile) -> Vec<CandidateEndpoint> {
-    let base = format!("http://127.0.0.1:{port}");
+fn build_candidate_endpoints(base: &str, selected: &SelectedFile) -> Vec<CandidateEndpoint> {
     let payload = json!({
         "id": "kupload",
         "cmd": "downloadAll",

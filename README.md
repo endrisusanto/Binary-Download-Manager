@@ -56,6 +56,16 @@ mdvh-agent-probe.exe ^
   --port 47317
 ```
 
+Jika agent memakai host/protocol berbeda, override base host:
+
+```cmd
+mdvh-agent-probe.exe ^
+  --workflow-json raonk-workflow-sample.json ^
+  --output-dir downloads ^
+  --host http://localhost ^
+  --port 47317
+```
+
 ### Build lokal
 
 ```bash

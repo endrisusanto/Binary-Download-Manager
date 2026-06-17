@@ -16,6 +16,9 @@ struct Args {
     output_dir: PathBuf,
 
     #[arg(long)]
+    host: Option<String>,
+
+    #[arg(long)]
     port: Option<u16>,
 
     #[arg(long, default_value_t = 10)]
@@ -60,6 +63,7 @@ async fn run() -> Result<i32> {
     let options = ProbeOptions {
         workflow_json: args.workflow_json,
         output_dir: args.output_dir,
+        host: args.host,
         port: args.port,
         timeout: Duration::from_secs(args.timeout_seconds),
     };
