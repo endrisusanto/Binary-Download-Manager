@@ -250,6 +250,7 @@ pub async fn run_probe(
     progress_callback: Option<ProgressCallback>,
 ) -> Result<ProbeReport> {
     let metadata = parse_workflow_file(&options.workflow_json)?;
+    println!("[DEBUG BDM] run_probe: Started for file: {}", metadata.selected_files.first().map(|f| f.file_name.as_str()).unwrap_or(""));
     let selected = metadata
         .selected_files
         .first()
@@ -442,6 +443,15 @@ pub async fn run_direct_download(
             }
         }
 
+        println!("[DEBUG BDM] Direct download trying URL: {}", sscm_url.url);
+        if sscm_url.is_post {
+            println!("[DEBUG BDM] Request Method: POST, Form Data: {:?}", sscm_url.form_data);
+        } else {
+            println!("[DEBUG BDM] Request Method: GET");
+        }
+        println!("[DEBUG BDM] Cookie Header: {:?}", cookies);
+        println!("[DEBUG BDM] Referer Header: {:?}", page_origin);
+
         let mut request = if sscm_url.is_post {
             let form_body = sscm_url.form_data.as_deref().unwrap_or("");
             client
@@ -457,6 +467,7 @@ pub async fn run_direct_download(
             .header("Referer", &page_origin);
 
         if start_bytes > 0 {
+            println!("[DEBUG BDM] Sending Range: bytes={}-", start_bytes);
             request = request.header("Range", format!("bytes={}-", start_bytes));
         }
 
@@ -464,17 +475,24 @@ pub async fn run_direct_download(
             Ok(r) => r,
             Err(e) => {
                 notes.push(format!("{} failed: {}", sscm_url.url, e));
+                println!("[DEBUG BDM] Request failed: {}", e);
                 continue;
             }
         };
 
         let status = response.status();
+        println!("[DEBUG BDM] HTTP Status: {}", status);
+        
         if !status.is_success() && status != StatusCode::PARTIAL_CONTENT {
             notes.push(format!(
                 "{} returned HTTP {}",
                 sscm_url.url,
                 status.as_u16()
             ));
+            println!("[DEBUG BDM] Non-success HTTP status: {}", status.as_u16());
+            let body_text = response.text().await.unwrap_or_default();
+            let limit = body_text.len().min(500);
+            println!("[DEBUG BDM] Error Response Body: {}", &body_text[..limit]);
             continue;
         }
 
@@ -485,6 +503,7 @@ pub async fn run_direct_download(
             .unwrap_or("")
             .to_ascii_lowercase();
         let content_length = response.content_length();
+        println!("[DEBUG BDM] Content-Type: {}, Content-Length: {:?}", content_type, content_length);
 
         // Check if this looks like a file response or just an HTML redirect/error
         let is_file = looks_like_file_response(&content_type, content_length, selected.size)
@@ -493,10 +512,13 @@ pub async fn run_direct_download(
             || content_type.contains("application/download");
 
         if !is_file {
+            let body_text = response.text().await.unwrap_or_default();
+            let limit = body_text.len().min(500);
             notes.push(format!(
-                "{} returned content-type: {}, length: {:?} — not a file",
-                sscm_url.url, content_type, content_length
+                "{} returned content-type: {}, length: {:?} — not a file. Preview: {}",
+                sscm_url.url, content_type, content_length, &body_text[..limit]
             ));
+            println!("[DEBUG BDM] Not a file response! Preview: {}", &body_text[..limit]);
             continue;
         }
 
