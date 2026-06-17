@@ -27,12 +27,32 @@ fn get_listener_status(state: tauri::State<'_, ListenerStatusState>) -> serde_js
     })
 }
 
+struct DownloadConfigState {
+    output_dir: std::sync::Mutex<std::path::PathBuf>,
+}
+
 #[tauri::command]
-fn open_download_folder(app: AppHandle) -> Result<(), String> {
+async fn pick_download_dir(app: tauri::AppHandle, state: tauri::State<'_, DownloadConfigState>) -> Result<Option<String>, String> {
+    use tauri_plugin_dialog::DialogExt;
+    let folder = app.dialog().file().blocking_pick_folder();
+    if let Some(path_buf) = folder {
+        let path_str = path_buf.to_string();
+        *state.output_dir.lock().unwrap() = std::path::PathBuf::from(&path_str);
+        Ok(Some(path_str))
+    } else {
+        Ok(None)
+    }
+}
+
+#[tauri::command]
+fn get_download_dir(state: tauri::State<'_, DownloadConfigState>) -> String {
+    state.output_dir.lock().unwrap().to_string_lossy().into_owned()
+}
+
+#[tauri::command]
+fn open_download_folder(app: AppHandle, state: tauri::State<'_, DownloadConfigState>) -> Result<(), String> {
     use tauri_plugin_opener::OpenerExt;
-    let path = std::env::current_dir()
-        .map(|p| p.join("downloads"))
-        .unwrap_or_else(|_| std::path::PathBuf::from("downloads"));
+    let path = state.output_dir.lock().unwrap().clone();
 
     // Create downloads folder if it doesn't exist
     let _ = std::fs::create_dir_all(&path);
@@ -203,53 +223,89 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
             }
         };
 
-        let selected = match metadata.selected_files.first() {
-            Some(f) => f.clone(),
-            None => {
-                let _ = app_clone.emit("download-error", "No selected files found in payload");
-                return;
+        if metadata.selected_files.is_empty() {
+            let _ = app_clone.emit("download-error", "No selected files found in payload");
+            return;
+        }
+
+        let timestamp = std::time::SystemTime::now()
+            .duration_since(std::time::UNIX_EPOCH)
+            .map(|d| d.as_millis())
+            .unwrap_or_default();
+
+        let output_dir_base = std::path::Path::new("payload-results");
+        let _ = tokio::fs::create_dir_all(&output_dir_base).await;
+
+        for (idx, selected) in metadata.selected_files.into_iter().enumerate() {
+            let app_file_clone = app_clone.clone();
+            let selected_clone = selected.clone();
+
+            // Build single file payload JSON to pass to run_probe
+            let single_payload = serde_json::json!({
+                "selectedFiles": [selected_clone],
+                "connectedPort": metadata.connected_port,
+            });
+
+            let temp_payload_path = output_dir_base.join(format!("mdvh-payload-temp-{}-{}.json", timestamp, idx));
+            let pretty = match serde_json::to_string_pretty(&single_payload) {
+                Ok(p) => p,
+                Err(e) => {
+                    let _ = app_file_clone.emit("download-error", format!("Failed to serialize temp payload: {}", e));
+                    continue;
+                }
+            };
+            if let Err(e) = tokio::fs::write(&temp_payload_path, &pretty).await {
+                let _ = app_file_clone.emit("download-error", format!("Failed to write temp payload: {}", e));
+                continue;
             }
-        };
 
-        // Emit download-started to let frontend know a download starts
-        let _ = app_clone.emit(
-            "download-started",
-            serde_json::json!({
-                "fileName": selected.file_name,
-                "expectedSize": selected.size,
-                "serverPath": selected.server_path,
-            }),
-        );
+            // Emit download-started to let frontend know a download starts
+            let _ = app_file_clone.emit(
+                "download-started",
+                serde_json::json!({
+                    "fileName": selected.file_name,
+                    "expectedSize": selected.size,
+                    "serverPath": selected.server_path,
+                }),
+            );
 
-        // 2. Run the probe and download
-        let options = ProbeOptions {
-            workflow_json: payload_path,
-            output_dir: std::path::PathBuf::from("downloads"),
-            host: None,
-            port: None,
-            timeout: std::time::Duration::from_secs(30),
-        };
+            // Fetch configured output directory from state
+            let output_dir = app_file_clone.state::<DownloadConfigState>().output_dir.lock().unwrap().clone();
 
-        // Progress callback to emit progress to frontend
-        let app_progress = app_clone.clone();
-        let callback: ProgressCallback = Arc::new(move |progress: DownloadProgress| {
-            let _ = app_progress.emit("download-progress", progress);
-        });
-        let progress_callback = Some(callback);
+            // Run the probe and download in a background task
+            let options = ProbeOptions {
+                workflow_json: temp_payload_path.clone(),
+                output_dir,
+                host: None,
+                port: None,
+                timeout: std::time::Duration::from_secs(30),
+            };
 
-        match run_probe(options, progress_callback).await {
-            Ok(report) => {
-                let _ = app_clone.emit("download-finished", report);
-            }
-            Err(e) => {
-                let _ = app_clone.emit(
-                    "download-failed",
-                    serde_json::json!({
-                        "fileName": selected.file_name.clone(),
-                        "error": format!("Download failed: {}", e)
-                    }),
-                );
-            }
+            // Progress callback to emit progress to frontend
+            let app_progress = app_file_clone.clone();
+            let callback: ProgressCallback = Arc::new(move |progress: DownloadProgress| {
+                let _ = app_progress.emit("download-progress", progress);
+            });
+            let progress_callback = Some(callback);
+
+            tokio::spawn(async move {
+                match run_probe(options, progress_callback).await {
+                    Ok(report) => {
+                        let _ = app_file_clone.emit("download-finished", report);
+                        let _ = tokio::fs::remove_file(&temp_payload_path).await;
+                    }
+                    Err(e) => {
+                        let _ = app_file_clone.emit(
+                            "download-failed",
+                            serde_json::json!({
+                                "fileName": selected.file_name.clone(),
+                                "error": format!("Download failed: {}", e)
+                            }),
+                        );
+                        let _ = tokio::fs::remove_file(&temp_payload_path).await;
+                    }
+                }
+            });
         }
     });
 
@@ -265,13 +321,21 @@ pub fn run() {
         }
     }
 
+    let default_output_dir = std::env::current_dir()
+        .map(|p| p.join("downloads"))
+        .unwrap_or_else(|_| std::path::PathBuf::from("downloads"));
+
     tauri::Builder::default()
         .manage(ListenerStatusState {
             active: std::sync::atomic::AtomicBool::new(false),
             bind: std::sync::Mutex::new("".to_string()),
             error: std::sync::Mutex::new(None),
         })
+        .manage(DownloadConfigState {
+            output_dir: std::sync::Mutex::new(default_output_dir),
+        })
         .plugin(tauri_plugin_opener::init())
+        .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
             let handle = app.handle().clone();
 
@@ -331,7 +395,9 @@ pub fn run() {
         })
         .invoke_handler(tauri::generate_handler![
             open_download_folder,
-            get_listener_status
+            get_listener_status,
+            pick_download_dir,
+            get_download_dir
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");

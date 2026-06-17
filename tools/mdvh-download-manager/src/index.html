@@ -9,14 +9,14 @@
 </head>
 <body>
   <div class="glass-bg"></div>
-  <div class="app-container">
-    <!-- Sidebar / Status Panel -->
-    <header class="app-header">
+  <div class="app-shell" data-theme="dark">
+    <!-- Topbar -->
+    <header class="topbar">
       <div class="brand">
         <img src="assets/logo.svg" alt="MDVH Download Manager" class="logo-image" />
         <div class="brand-text">
           <h1>MDVH Download Manager</h1>
-          <p class="subtitle">Phase 1: Interceptor & Downloader</p>
+          <p class="subtitle">SSCM / MDVH Binary Bridging Tool v0.1.12</p>
         </div>
       </div>
       
@@ -25,41 +25,84 @@
           <span class="status-dot offline"></span>
           <span class="status-text">Connecting...</span>
         </div>
-        <button id="btn-open-folder" class="btn btn-secondary">
-          <span class="icon">📁</span> Open Downloads
+        <button id="btn-open-folder" class="secondary-button" title="Open download directory">
+          📁 Open Downloads
         </button>
-        <button id="btn-clear-queue" class="btn btn-danger">
-          <span class="icon">🗑️</span> Clear Queue
+        <button id="btn-clear-queue" class="secondary-button danger" title="Clear completed and failed downloads">
+          🗑️ Clear Queue
         </button>
       </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="app-content">
-      <section class="queue-section">
-        <div class="section-header">
-          <h2>Active Downloads</h2>
-          <span class="badge" id="queue-count">0 items</span>
-        </div>
+    <!-- Dashboard Strip -->
+    <section class="dashboard-strip">
+      <div class="metric-card builds">
+        <span>Total Items</span>
+        <strong id="metric-total">0</strong>
+        <small id="sub-total">0 selected</small>
+      </div>
+      <div class="metric-card active">
+        <span>Active</span>
+        <strong id="metric-active">0</strong>
+        <small id="sub-active">0 B/s avg</small>
+      </div>
+      <div class="metric-card done">
+        <span>Completed</span>
+        <strong id="metric-completed">0</strong>
+        <small id="sub-completed" class="danger-text">0 failed</small>
+      </div>
+      <div class="metric-card storage" id="btn-pick-folder" style="cursor: pointer;" title="Click to change download directory">
+        <span>Download Folder</span>
+        <strong class="folder-title">downloads</strong>
+        <small id="sub-folder" class="folder-path">Set download folder</small>
+      </div>
+    </section>
 
-        <!-- Empty State -->
-        <div class="empty-state" id="empty-state">
-          <div class="empty-icon">📥</div>
-          <h3>No downloads in queue</h3>
-          <p>Go to MDVH in your browser, select your files, and click "Download". The bridge extension will automatically capture the payload and start the download here.</p>
-        </div>
+    <!-- Main Content Area -->
+    <section class="content-area">
+      <!-- Empty State -->
+      <div class="empty-state" id="empty-state">
+        <div class="empty-icon">📥</div>
+        <h1>MDVH Download Manager</h1>
+        <p>Go to MDVH in your browser, select your files, and click "Download". The bridge extension will automatically capture the payload and start the download here.</p>
+      </div>
 
-        <!-- Download List -->
-        <div class="download-list" id="download-list" style="display: none;">
-          <!-- Items will be injected dynamically -->
-        </div>
-      </section>
-    </main>
+      <!-- Accordion Stack -->
+      <div class="accordion-stack" id="accordion-stack" style="display: none;">
+        <!-- In Progress Accordion -->
+        <section class="task-accordion open" id="sec-progress">
+          <div class="accordion-heading" role="button" tabIndex="0">
+            <span>In-progress downloads</span>
+            <strong id="count-progress">0</strong>
+          </div>
+          <div class="group-list" id="list-progress">
+            <!-- Downloading items go here -->
+          </div>
+        </section>
 
-    <!-- Footer -->
-    <footer class="app-footer">
-      <p>Listening on <code>127.0.0.1:48991</code> | SSCM / MDVH Binary Bridging Tool v0.1.0</p>
-    </footer>
+        <!-- Completed Accordion -->
+        <section class="task-accordion open" id="sec-completed">
+          <div class="accordion-heading" role="button" tabIndex="0">
+            <span>Download completed</span>
+            <strong id="count-completed">0</strong>
+          </div>
+          <div class="group-list" id="list-completed">
+            <!-- Completed items go here -->
+          </div>
+        </section>
+
+        <!-- Failed Accordion -->
+        <section class="task-accordion open" id="sec-failed">
+          <div class="accordion-heading" role="button" tabIndex="0">
+            <span>Download failed</span>
+            <strong id="count-failed">0</strong>
+          </div>
+          <div class="group-list" id="list-failed">
+            <!-- Failed items go here -->
+          </div>
+        </section>
+      </div>
+    </section>
   </div>
 </body>
 </html>
