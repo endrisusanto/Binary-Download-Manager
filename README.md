@@ -16,6 +16,26 @@ Fokus saat ini:
 
 ## CLI
 
+## Release Script
+
+Untuk build, auto commit, bump version, tag, dan push:
+
+```bash
+scripts/release.sh patch
+```
+
+Pilihan versi:
+
+```bash
+scripts/release.sh patch
+scripts/release.sh minor
+scripts/release.sh major
+scripts/release.sh 0.2.0
+scripts/release.sh patch --no-push
+```
+
+Script akan menjalankan `cargo fmt`, `cargo test`, `cargo build --release`, commit `chore: release vX.Y.Z`, membuat tag `vX.Y.Z`, lalu push commit dan tag. Push tag `v*` akan memicu GitHub Actions build Windows artifact.
+
 ### Build dari GitHub Actions
 
 Kalau Windows lokal belum punya MSVC linker, gunakan GitHub Actions:
