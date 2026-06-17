@@ -73,7 +73,9 @@ fn pause_download(
     state: tauri::State<'_, DownloadManagerState>,
 ) -> Result<(), String> {
     if let Some(download) = state.active_downloads.lock().unwrap().get(&file_name) {
-        download.cancellation_token.store(true, std::sync::atomic::Ordering::Relaxed);
+        download
+            .cancellation_token
+            .store(true, std::sync::atomic::Ordering::Relaxed);
         Ok(())
     } else {
         Err(format!("Download {} not found", file_name))
@@ -96,7 +98,9 @@ async fn resume_download(
     };
 
     // Trigger download using the stored temporary payload JSON
-    trigger_download(&app, temp_payload_path).await.map_err(|e| e.to_string())
+    trigger_download(&app, temp_payload_path)
+        .await
+        .map_err(|e| e.to_string())
 }
 
 #[tauri::command]
@@ -341,7 +345,7 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
                 .clone();
 
             let cancellation_token = Arc::new(std::sync::atomic::AtomicBool::new(false));
-            
+
             // Store active download
             {
                 let state = app_file_clone.state::<DownloadManagerState>();
@@ -382,14 +386,19 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
 
                 match result {
                     Ok(report) => {
-                        let is_cancelled = matches!(report.status, mdvh_agent_probe::ProbeStatus::Cancelled);
+                        let is_cancelled =
+                            matches!(report.status, mdvh_agent_probe::ProbeStatus::Cancelled);
                         let _ = app_file_clone.emit("download-finished", &report);
-                        
+
                         // Only remove payload if not cancelled, because we need it to resume
                         if !is_cancelled {
                             let _ = tokio::fs::remove_file(&temp_payload_path).await;
                             let state = app_file_clone.state::<DownloadManagerState>();
-                            state.active_downloads.lock().unwrap().remove(&selected.file_name);
+                            state
+                                .active_downloads
+                                .lock()
+                                .unwrap()
+                                .remove(&selected.file_name);
                         }
                     }
                     Err(e) => {
@@ -402,7 +411,11 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
                         );
                         let _ = tokio::fs::remove_file(&temp_payload_path).await;
                         let state = app_file_clone.state::<DownloadManagerState>();
-                        state.active_downloads.lock().unwrap().remove(&selected.file_name);
+                        state
+                            .active_downloads
+                            .lock()
+                            .unwrap()
+                            .remove(&selected.file_name);
                     }
                 }
             });

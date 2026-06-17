@@ -221,10 +221,7 @@ pub fn parse_workflow_json(contents: &str) -> Result<WorkflowMetadata> {
             .and_then(Value::as_str)
             .map(String::from);
 
-        let cookies = obj
-            .get("cookies")
-            .and_then(Value::as_str)
-            .map(String::from);
+        let cookies = obj.get("cookies").and_then(Value::as_str).map(String::from);
 
         let page_origin = obj
             .get("pageOrigin")
@@ -473,7 +470,11 @@ pub async fn run_direct_download(
 
         let status = response.status();
         if !status.is_success() && status != StatusCode::PARTIAL_CONTENT {
-            notes.push(format!("{} returned HTTP {}", sscm_url.url, status.as_u16()));
+            notes.push(format!(
+                "{} returned HTTP {}",
+                sscm_url.url,
+                status.as_u16()
+            ));
             continue;
         }
 
@@ -531,7 +532,11 @@ pub async fn run_direct_download(
         }
 
         let total_bytes = start_bytes + bytes;
-        notes.push(format!("downloaded {} bytes to {}", total_bytes, output_path.display()));
+        notes.push(format!(
+            "downloaded {} bytes to {}",
+            total_bytes,
+            output_path.display()
+        ));
 
         if total_bytes == selected.size {
             notes.push("actual size matches expected size".to_string());
@@ -597,10 +602,7 @@ fn build_sscm_download_urls(
     }
 
     // Add selected file params
-    form_parts.push(format!(
-        "selectFile={}",
-        urlencoding::encode("on")
-    ));
+    form_parts.push(format!("selectFile={}", urlencoding::encode("on")));
     if let Some(stamp) = &selected.stamp {
         let meta = format!(
             "{}*{}*{}*{}*{}",
@@ -610,10 +612,7 @@ fn build_sscm_download_urls(
             selected.server_path,
             selected.size
         );
-        form_parts.push(format!(
-            "selectFileMeta={}",
-            urlencoding::encode(&meta)
-        ));
+        form_parts.push(format!("selectFileMeta={}", urlencoding::encode(&meta)));
     }
     if let Some(binary_id) = &selected.binary_id {
         form_parts.push(format!(
@@ -622,17 +621,17 @@ fn build_sscm_download_urls(
         ));
     }
     if let Some(file_id) = &selected.file_id {
-        form_parts.push(format!(
-            "selectFileId={}",
-            urlencoding::encode(file_id)
-        ));
+        form_parts.push(format!("selectFileId={}", urlencoding::encode(file_id)));
     }
 
     let form_data = form_parts.join("&");
 
     // Primary: SSCM download endpoint via form POST
     urls.push(SscmDownloadUrl {
-        url: format!("{}/sscm/appm/srbin/pjt/srBinaryFileDownload.do", page_origin),
+        url: format!(
+            "{}/sscm/appm/srbin/pjt/srBinaryFileDownload.do",
+            page_origin
+        ),
         is_post: true,
         form_data: Some(form_data.clone()),
     });
@@ -1061,7 +1060,9 @@ async fn try_candidate(
         .unwrap_or("")
         .to_ascii_lowercase();
     let content_length = response.content_length();
-    if looks_like_file_response(&content_type, content_length, selected.size) || status == StatusCode::PARTIAL_CONTENT {
+    if looks_like_file_response(&content_type, content_length, selected.size)
+        || status == StatusCode::PARTIAL_CONTENT
+    {
         let is_partial = status == StatusCode::PARTIAL_CONTENT;
         if !is_partial {
             start_bytes = 0; // The server ignored the Range header
@@ -1125,7 +1126,8 @@ async fn save_response_body(
         options.truncate(true);
     }
 
-    let mut file = options.open(output_path)
+    let mut file = options
+        .open(output_path)
         .await
         .with_context(|| format!("failed to create or open {}", output_path.display()))?;
 
