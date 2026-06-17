@@ -358,6 +358,45 @@ async function setupTauriListeners() {
       return;
     }
 
+    if (report.status === "failed") {
+      // Update state to failed
+      dbItem.status = "failed";
+      dbItem.statusPill.className = "status-pill failed";
+      dbItem.statusPill.textContent = "Failed";
+
+      // Hide progress bar section
+      const progressSec = dbItem.el.querySelector(`#prog-${dbItem.el.id}`);
+      if (progressSec) progressSec.style.display = "none";
+
+      // Update metadata label with error notes
+      const notesStr = report.notes && report.notes.length > 0 
+        ? report.notes[report.notes.length - 1] 
+        : "Direct download failed";
+      dbItem.metaText.textContent = `Error: ${notesStr}`;
+
+      // Update action buttons (Add retry/refresh button, remove pause/resume)
+      const actionsArea = dbItem.el.querySelector(".card-actions");
+      actionsArea.innerHTML = `
+        <button class="action-btn retry-btn" title="Retry download">🔄</button>
+        <button class="action-btn danger cancel-btn" title="Remove card">🗑️</button>
+      `;
+      actionsArea.querySelector(".retry-btn").addEventListener("click", () => {
+        dbItem.el.remove();
+        delete downloadsDb[fileName];
+        updateMetrics();
+      });
+      actionsArea.querySelector(".cancel-btn").addEventListener("click", () => {
+        dbItem.el.remove();
+        delete downloadsDb[fileName];
+        updateMetrics();
+      });
+
+      // Move card to failed list
+      listFailedEl.appendChild(dbItem.el);
+      updateMetrics();
+      return;
+    }
+
     // Update state to completed
     dbItem.status = "completed";
     dbItem.statusPill.className = "status-pill success";
