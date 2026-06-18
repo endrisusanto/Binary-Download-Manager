@@ -58,6 +58,8 @@ pub struct WorkflowMetadata {
     pub page_origin: Option<String>,
     #[serde(default)]
     pub release: Option<Value>,
+    #[serde(default, rename = "userAgent")]
+    pub user_agent: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -192,6 +194,7 @@ pub fn parse_workflow_json(contents: &str) -> Result<WorkflowMetadata> {
             cookies: None,
             page_origin: None,
             release: None,
+            user_agent: None,
         })
     } else if let Some(obj) = root.as_object() {
         let files_value = obj
@@ -230,6 +233,11 @@ pub fn parse_workflow_json(contents: &str) -> Result<WorkflowMetadata> {
 
         let release = obj.get("release").cloned();
 
+        let user_agent = obj
+            .get("userAgent")
+            .and_then(Value::as_str)
+            .map(String::from);
+
         Ok(WorkflowMetadata {
             selected_files,
             connected_port,
@@ -237,6 +245,7 @@ pub fn parse_workflow_json(contents: &str) -> Result<WorkflowMetadata> {
             cookies,
             page_origin,
             release,
+            user_agent,
         })
     } else {
         Err(anyhow!(
@@ -461,12 +470,14 @@ pub async fn run_direct_download(
         }
         println!("[DEBUG BDM] Cookie Header: {:?}", cookies);
         println!("[DEBUG BDM] Referer Header: {:?}", page_origin);
+        println!("[DEBUG BDM] User-Agent Header: {:?}", metadata.user_agent);
 
         let mut request = if sscm_url.is_post {
             let form_body = sscm_url.form_data.as_deref().unwrap_or("");
             client
                 .post(&sscm_url.url)
                 .header("Content-Type", "application/x-www-form-urlencoded")
+                .header("Origin", &page_origin)
                 .body(form_body.to_string())
         } else {
             client.get(&sscm_url.url)
@@ -474,7 +485,15 @@ pub async fn run_direct_download(
 
         request = request
             .header("Cookie", &cookies)
-            .header("Referer", &page_origin);
+            .header("Referer", &page_origin)
+            .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7")
+            .header("Accept-Language", "en-US,en;q=0.9,ko;q=0.8");
+
+        if let Some(ua) = &metadata.user_agent {
+            request = request.header("User-Agent", ua);
+        } else {
+            request = request.header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36");
+        }
 
         if start_bytes > 0 {
             println!("[DEBUG BDM] Sending Range: bytes={}-", start_bytes);

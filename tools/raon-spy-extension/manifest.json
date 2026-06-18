@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "RAONK Downloader Spy",
+  "version": "0.1.0",
+  "description": "Spy on RAONK / KUpload local agent communication and network requests.",
+  "permissions": [],
+  "host_permissions": [
+    "http://mdvh.sec.samsung.net/*",
+    "http://127.0.0.1/*",
+    "http://localhost/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["http://mdvh.sec.samsung.net/*"],
+      "js": ["content.js"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    }
+  ]
+}

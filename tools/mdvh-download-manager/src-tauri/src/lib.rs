@@ -309,6 +309,7 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
                 "release": metadata.release,
                 "cookies": metadata.cookies,
                 "pageOrigin": metadata.page_origin,
+                "userAgent": metadata.user_agent,
             });
 
             let temp_payload_path =
