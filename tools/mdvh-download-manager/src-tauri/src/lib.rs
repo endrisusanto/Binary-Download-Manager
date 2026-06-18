@@ -412,7 +412,12 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
                     println!("[DEBUG BDM] Starting local agent probe...");
                     let probe_res = run_probe(options.clone(), progress_callback.clone()).await;
                     match &probe_res {
-                        Ok(report) if matches!(report.status, mdvh_agent_probe::ProbeStatus::Downloaded) => {
+                        Ok(report)
+                            if matches!(
+                                report.status,
+                                mdvh_agent_probe::ProbeStatus::Downloaded
+                            ) =>
+                        {
                             probe_res
                         }
                         other => {
