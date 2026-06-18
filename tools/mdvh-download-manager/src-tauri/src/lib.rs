@@ -410,7 +410,16 @@ async fn trigger_download(app: &AppHandle, payload_path: std::path::PathBuf) -> 
                     run_direct_download(options, progress_callback).await
                 } else {
                     println!("[DEBUG BDM] Starting local agent probe...");
-                    run_probe(options, progress_callback).await
+                    let probe_res = run_probe(options.clone(), progress_callback.clone()).await;
+                    match &probe_res {
+                        Ok(report) if matches!(report.status, mdvh_agent_probe::ProbeStatus::Downloaded) => {
+                            probe_res
+                        }
+                        other => {
+                            println!("[DEBUG BDM] Local agent probe returned non-downloaded: {:?}. Falling back to direct SSCM download...", other);
+                            run_direct_download(options, progress_callback).await
+                        }
+                    }
                 };
 
                 println!(
